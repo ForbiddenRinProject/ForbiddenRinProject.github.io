@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
-    <link rel="stylesheet" href="styles.css"> <!-- This links your CSS file -->
-</head>
-<body>
-    <h1>Welcome to My Website</h1>
-    <p>This is a simple HTML page with linked CSS.</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Opening Animation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="book" id="book">
+      <div class="spine"></div>
+      <div class="cover"></div>
+      <div class="cover-back"></div>
+      <div class="page"></div>
+      <div class="page"></div>
+      <div class="page"></div>
+    </div>
+
+    <script>
+      document.getElementById("book").addEventListener("click", function () {
+        this.classList.toggle("open");
+      });
+    </script>
+  </body>
 </html>
