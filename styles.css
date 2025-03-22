@@ -16,29 +16,39 @@ body {
   transition: transform 2s ease-in-out;
 }
 
-.cover,
+/* Covers & Pages */
+.front-cover,
+.back-cover,
 .page {
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  transform-origin: left;
   transition: transform 1.2s ease-in-out;
+  transform-origin: left;
 }
 
-.cover {
+/* Front Cover */
+.front-cover {
   background: #8b4513;
   transform: rotateY(0deg);
   z-index: 5;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 1.2s ease-in-out; /* Matching cover and page flip timing */
 }
 
-.cover.back {
-  transform-origin: right;
+/* Back Cover */
+.back-cover {
   background: #8b4513;
-  z-index: 3;
-  transform: rotateY(180deg);
+  transform-origin: left;
+  z-index: 1;
+}
+
+/* Pages */
+.pages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
 .page {
@@ -46,10 +56,10 @@ body {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   z-index: 4;
   transform: rotateY(0deg);
-  opacity: 1;
   backface-visibility: hidden;
 }
 
+/* Spine */
 .spine {
   position: absolute;
   width: 20px;
@@ -61,39 +71,35 @@ body {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.book.open .cover {
-  transform: rotateY(-180deg); /* Front cover rotation */
-  z-index: 6; /* Ensure the front cover rotates in front of pages */
+/* Book Opening */
+.book.open .front-cover {
+  transform: rotateY(-180deg);
+  z-index: 6;
+  pointer-events: none;
 }
 
 .book.open {
-  transform: scale(1.5) translateY(-50px) translateZ(50px); /* Zoom-in effect */
+  transform: scale(1.5) translateY(-50px) translateZ(50px);
 }
 
 /* Page Flip Animations */
-.book.open .page:nth-child(4) {
+.book.open .pages .page:nth-child(1) {
   animation: flip 1.2s 1.2s forwards;
-  z-index: 2; /* Keep pages behind the cover */
 }
-.book.open .page:nth-child(5) {
+.book.open .pages .page:nth-child(2) {
   animation: flip 1.2s 1.4s forwards;
-  z-index: 2;
 }
-.book.open .page:nth-child(6) {
+.book.open .pages .page:nth-child(3) {
   animation: flip 1.2s 1.6s forwards;
-  z-index: 2;
 }
-.book.open .page:nth-child(7) {
+.book.open .pages .page:nth-child(4) {
   animation: flip 1.2s 1.8s forwards;
-  z-index: 2;
 }
-.book.open .page:nth-child(8) {
+.book.open .pages .page:nth-child(5) {
   animation: flip 1.2s 2s forwards;
-  z-index: 2;
 }
-.book.open .page:nth-child(9) {
+.book.open .pages .page:nth-child(6) {
   animation: flip 1.2s 2.2s forwards;
-  z-index: 2;
 }
 
 @keyframes flip {
