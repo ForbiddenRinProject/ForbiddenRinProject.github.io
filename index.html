@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Opening Animation</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -16,15 +13,23 @@
         <div class="page"></div>
         <div class="page"></div>
         <div class="page"></div>
-        <div class="page"></div>
-        <div class="page"></div>
       </div>
+
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+      <div class="flip-page"></div>
+
       <div class="front-cover"></div>
     </div>
 
     <script>
-      document.getElementById("book").addEventListener("click", function () {
-        this.classList.toggle("open");
+      const book = document.getElementById("book");
+      book.addEventListener("click", () => {
+        book.classList.toggle("open");
       });
     </script>
   </body>

@@ -1,3 +1,4 @@
+/* style.css */
 body {
   display: flex;
   justify-content: center;
@@ -14,12 +15,14 @@ body {
   perspective: 1200px;
   transform-style: preserve-3d;
   transition: transform 2s ease-in-out;
+  transform: rotateX(20deg) rotateY(-30deg) scale(1);
 }
 
 /* Covers & Pages */
 .front-cover,
 .back-cover,
-.page {
+.page,
+.flip-page {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -31,7 +34,7 @@ body {
 /* Front Cover */
 .front-cover {
   background: #8b4513;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(0px);
   z-index: 5;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
@@ -39,7 +42,7 @@ body {
 /* Back Cover */
 .back-cover {
   background: #8b4513;
-  transform-origin: left;
+  transform: rotateY(0deg) translateZ(-50px);
   z-index: 1;
 }
 
@@ -54,10 +57,38 @@ body {
 
 .page {
   background: #fff;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
   z-index: 4;
   transform: rotateY(0deg);
   backface-visibility: visible;
+}
+
+/* Spine Effect */
+.page::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background: #5d3a1a;
+  left: 0;
+  top: 0;
+}
+
+/* Thicker Pages */
+.page:nth-child(1) {
+  transform: translateZ(-40px);
+}
+.page:nth-child(2) {
+  transform: translateZ(-30px);
+}
+.page:nth-child(3) {
+  transform: translateZ(-20px);
+}
+.page:nth-child(4) {
+  transform: translateZ(-10px);
+}
+.page:nth-child(5) {
+  transform: translateZ(0px);
 }
 
 /* Spine */
@@ -74,33 +105,45 @@ body {
 
 /* Book Opening */
 .book.open .front-cover {
-  transform: rotateY(-180deg);
+  transform: rotateY(-180deg) translateZ(0px);
   z-index: 6;
   pointer-events: none;
 }
 
 .book.open {
-  transform: scale(1.5) translateY(-50px) translateZ(50px);
+  transform: rotateX(20deg) rotateY(-30deg) scale(1.5) translateY(-50px)
+    translateZ(50px);
 }
 
-/* Page Flip Animations */
-.book.open .pages .page:nth-child(1) {
+/* Flip Pages Animation */
+.flip-page {
+  background: #fff;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+  transform: rotateY(0deg);
+  backface-visibility: visible;
+  z-index: 4;
+}
+
+.book.open .flip-page:nth-of-type(1) {
   animation: flip 1.2s 1.2s forwards;
 }
-.book.open .pages .page:nth-child(2) {
+.book.open .flip-page:nth-of-type(2) {
   animation: flip 1.2s 1.4s forwards;
 }
-.book.open .pages .page:nth-child(3) {
+.book.open .flip-page:nth-of-type(3) {
   animation: flip 1.2s 1.6s forwards;
 }
-.book.open .pages .page:nth-child(4) {
+.book.open .flip-page:nth-of-type(4) {
   animation: flip 1.2s 1.8s forwards;
 }
-.book.open .pages .page:nth-child(5) {
+.book.open .flip-page:nth-of-type(5) {
   animation: flip 1.2s 2s forwards;
 }
-.book.open .pages .page:nth-child(6) {
+.book.open .flip-page:nth-of-type(6) {
   animation: flip 1.2s 2.2s forwards;
+}
+.book.open .flip-page:nth-of-type(7) {
+  animation: flip 1.2s 2.4s forwards;
 }
 
 @keyframes flip {
