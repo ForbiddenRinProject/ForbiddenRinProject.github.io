@@ -5,7 +5,7 @@ body {
   height: 100vh;
   background: url("./Main/Images/background.png") no-repeat center center;
   background-size: cover;
-  transition: transform 2s ease-in-out;
+  transition: transform 4s ease-in-out;
 }
 
 .book {
@@ -14,7 +14,7 @@ body {
   height: 320px;
   perspective: 1200px;
   transform-style: preserve-3d;
-  transition: transform 2s ease-in-out;
+  transition: transform 4s ease-in-out;
   transform: rotateX(20deg) rotateY(-30deg) scale(1);
 }
 
@@ -37,6 +37,12 @@ body {
   z-index: 5;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   position: relative;
+  transition: transform 1.2s ease-in-out; /* Smooth open & close */
+}
+
+/* When Closing, delay the cover transition so pages close first */
+.book:not(.open) .front-cover {
+  transition-delay: 2.6s;
 }
 
 /* Inside Front Cover (Visible During Opening) */
@@ -48,12 +54,6 @@ body {
   transform: rotateY(180deg) translateZ(1px);
   border-radius: 5px;
   z-index: 3;
-}
-
-/* Book Closing - Front Cover */
-.book:not(.open) .front-cover {
-  transition: transform 1.2s ease-in-out 2.4s;
-  transform: rotateY(0deg) translateZ(0px);
 }
 
 /* Back Cover */
