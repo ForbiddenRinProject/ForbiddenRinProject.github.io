@@ -1,10 +1,10 @@
-/* style.css */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f3f3f3;
+  background: url("./Main/Images/background.png") no-repeat center center;
+  background-size: cover;
   transition: transform 2s ease-in-out;
 }
 
@@ -27,7 +27,6 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  transition: transform 1.2s ease-in-out;
   transform-origin: left;
 }
 
@@ -37,6 +36,24 @@ body {
   transform: rotateY(0deg) translateZ(0px);
   z-index: 5;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Inside Front Cover (Visible During Opening) */
+.inside-front-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: rotateY(180deg) translateZ(1px);
+  border-radius: 5px;
+  z-index: 3;
+}
+
+/* Book Closing - Front Cover */
+.book:not(.open) .front-cover {
+  transition: transform 1.2s ease-in-out 2.4s;
+  transform: rotateY(0deg) translateZ(0px);
 }
 
 /* Back Cover */
@@ -60,7 +77,6 @@ body {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
   z-index: 4;
   transform: rotateY(0deg);
-  backface-visibility: visible;
 }
 
 /* Spine Effect */
@@ -115,42 +131,71 @@ body {
     translateZ(50px);
 }
 
-/* Flip Pages Animation */
+/* Flip Pages Base - using transitions to preserve the flipping effect */
 .flip-page {
   background: #fff;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
   transform: rotateY(0deg);
-  backface-visibility: visible;
   z-index: 4;
+  transition: transform 1.2s ease-in-out;
 }
 
+/* Flip Pages Animation for Opening (staggered delays) */
 .book.open .flip-page:nth-of-type(1) {
-  animation: flip 1.2s 1.2s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 1.2s;
 }
 .book.open .flip-page:nth-of-type(2) {
-  animation: flip 1.2s 1.4s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 1.4s;
 }
 .book.open .flip-page:nth-of-type(3) {
-  animation: flip 1.2s 1.6s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 1.6s;
 }
 .book.open .flip-page:nth-of-type(4) {
-  animation: flip 1.2s 1.8s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 1.8s;
 }
 .book.open .flip-page:nth-of-type(5) {
-  animation: flip 1.2s 2s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 2s;
 }
 .book.open .flip-page:nth-of-type(6) {
-  animation: flip 1.2s 2.2s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 2.2s;
 }
 .book.open .flip-page:nth-of-type(7) {
-  animation: flip 1.2s 2.4s forwards;
+  transform: rotateY(-179.9deg);
+  transition-delay: 2.4s;
 }
 
-@keyframes flip {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(-179.9deg);
-  }
+/* Flip Pages Animation for Closing (reverse order delays) */
+.book:not(.open) .flip-page:nth-of-type(1) {
+  transform: rotateY(0deg);
+  transition-delay: 2.4s;
+}
+.book:not(.open) .flip-page:nth-of-type(2) {
+  transform: rotateY(0deg);
+  transition-delay: 2.2s;
+}
+.book:not(.open) .flip-page:nth-of-type(3) {
+  transform: rotateY(0deg);
+  transition-delay: 2s;
+}
+.book:not(.open) .flip-page:nth-of-type(4) {
+  transform: rotateY(0deg);
+  transition-delay: 1.8s;
+}
+.book:not(.open) .flip-page:nth-of-type(5) {
+  transform: rotateY(0deg);
+  transition-delay: 1.6s;
+}
+.book:not(.open) .flip-page:nth-of-type(6) {
+  transform: rotateY(0deg);
+  transition-delay: 1.4s;
+}
+.book:not(.open) .flip-page:nth-of-type(7) {
+  transform: rotateY(0deg);
+  transition-delay: 1.2s;
 }
