@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Animated Book</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -8,11 +10,13 @@
       <div class="spine"></div>
       <div class="back-cover"></div>
       <div class="pages">
+        <!-- Other pages (stacked behind) -->
         <div class="page"></div>
         <div class="page"></div>
         <div class="page"></div>
         <div class="page"></div>
-        <div class="page"></div>
+        <!-- The first (right/visible) page as image -->
+        <div class="page first-page"></div>
       </div>
 
       <div class="flip-page"></div>
@@ -23,9 +27,12 @@
       <div class="flip-page"></div>
       <div class="flip-page"></div>
 
-      <!-- Moved .inside-front-cover outside of .front-cover -->
+      <!-- Inside front cover remains unchanged -->
       <div class="inside-front-cover"></div>
-      <div class="front-cover"></div>
+      <div class="front-cover">
+        <h1 class="cover-text">Forbidden</h1>
+        <h2 class="cover-text">Rin</h2>
+      </div>
     </div>
 
     <script>

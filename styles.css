@@ -30,27 +30,77 @@ body {
   transform-origin: left;
 }
 
-/* Front Cover */
+/* Front Cover with cool design */
 .front-cover {
-  background: #8b4513;
+  background: linear-gradient(135deg, #ffc400, #5c2a01);
   transform: rotateY(0deg) translateZ(0px);
   z-index: 5;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   position: relative;
-  transition: transform 1.2s ease-in-out; /* Smooth open & close */
+  transition: transform 1.2s ease-in-out;
+
+  /* Flex container to center text */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Box shadow for a 3D effect */
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6), 5px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* When Closing, delay the cover transition so pages close first */
+.front-cover::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  width: 84%;
+  height: 84%;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.front-cover::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.cover-text {
+  margin: 0;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.cover-text:first-child {
+  font-size: 36px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.cover-text:last-child {
+  font-size: 24px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* When the book is closed, delay the front cover transition */
 .book:not(.open) .front-cover {
   transition-delay: 2.6s;
 }
 
-/* Inside Front Cover (Visible During Opening) */
+/* Inside Front Cover (not modified for this change) */
 .inside-front-cover {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: white;
+  background: #fff;
   transform: rotateY(180deg) translateZ(1px);
   border-radius: 5px;
   z-index: 3;
@@ -63,7 +113,7 @@ body {
   z-index: 1;
 }
 
-/* Pages */
+/* Pages container */
 .pages {
   position: absolute;
   width: 100%;
@@ -72,6 +122,12 @@ body {
   z-index: 3;
 }
 
+/* Raise pages container when book is open */
+.book.open .pages {
+  z-index: 7;
+}
+
+/* Page styling */
 .page {
   background: #fff;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
@@ -79,7 +135,6 @@ body {
   transform: rotateY(0deg);
 }
 
-/* Spine Effect */
 .page::before {
   content: "";
   position: absolute;
@@ -90,7 +145,7 @@ body {
   top: 0;
 }
 
-/* Thicker Pages */
+/* Stacking pages (the last child is on top) */
 .page:nth-child(1) {
   transform: translateZ(-40px);
 }
@@ -131,7 +186,7 @@ body {
     translateZ(50px);
 }
 
-/* Flip Pages Base - using transitions to preserve the flipping effect */
+/* Flip Pages */
 .flip-page {
   background: #fff;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
@@ -140,7 +195,6 @@ body {
   transition: transform 1.2s ease-in-out;
 }
 
-/* Flip Pages Animation for Opening (staggered delays) */
 .book.open .flip-page:nth-of-type(1) {
   transform: rotateY(-179.9deg);
   transition-delay: 1.2s;
@@ -170,7 +224,6 @@ body {
   transition-delay: 2.4s;
 }
 
-/* Flip Pages Animation for Closing (reverse order delays) */
 .book:not(.open) .flip-page:nth-of-type(1) {
   transform: rotateY(0deg);
   transition-delay: 2.4s;
@@ -198,4 +251,22 @@ body {
 .book:not(.open) .flip-page:nth-of-type(7) {
   transform: rotateY(0deg);
   transition-delay: 1.2s;
+}
+
+.first-page {
+  background: url("./Main/Images/page.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: 8;
+  opacity: 0; /* initially hidden */
+  transition: opacity 0.5s ease;
+}
+
+.book.open .first-page {
+  opacity: 1; /* fade in when the book is open */
+  transition-delay: 2.6s; /* delay to match the flipping animation */
+}
+
+.book:not(.open) .first-page {
+  opacity: 0; /* fade out (dim) when closing */
+  transition-delay: 0s; /* no delay on fade out */
 }
