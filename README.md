@@ -7,7 +7,9 @@ Original site: https://forbidden-rin.foggyeft7.chatgpt.site
 
 The site now opens in the illustrated reading room with the book resting on the desk. Trees, water, leaves and sunlight move until paused. Activating the book opens its cover, turns five pages, moves the camera toward the open spread, and enters the Story reader without a white flash. The original overhead desk artwork is reused for the second part of the camera sequence and the reading background.
 
-`dist/room-reader.css` positions the desk book and styles the reader as a bound paper spread. Desktop shows the title/contents leaf beside the reading leaf; small screens use a single-column layout for readable text. Chapters, bookmarks, font size, night reading, Author’s Desk and the other views remain available. Return to the room resets the sequence, and reduced motion enters reading directly.
+`dist/room-reader.css` positions the desk book and styles the reader as a bound paper spread. Desktop shows the title/contents leaf beside the reading leaf; small screens use a single-column layout for readable text. Chapters, bookmarks, font size, night reading, Author’s Desk and the other views remain available.
+
+The room tab pulls the camera back, closes the hardcover and returns the book to the desk. Reduced motion enters and leaves reading directly. The book has a visible page block, spine and thick cover edges; its hover glow responds in 120 ms. The zoom ends at the live reader’s measured dimensions and position, using the same paper spread and a stationary desk background for the handoff.
 
 The ZIP and `EXPORT-MANIFEST.json` preserve the original export; their hashes describe that snapshot, not subsequent development edits. The editable website is `dist/`.
 

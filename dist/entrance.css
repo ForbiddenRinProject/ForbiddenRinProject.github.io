@@ -25,8 +25,30 @@
 .portal-book{position:relative;left:135px;width:270px;height:382px;cursor:pointer;outline:none;transform:translateX(0);transition:transform .95s cubic-bezier(.22,.6,.3,1);isolation:isolate;user-select:none;touch-action:manipulation}
 .portal-book[aria-disabled="true"]{cursor:default;pointer-events:none;opacity:1}
 .portal-book:focus-visible .portal-cover{outline:3px solid #fff1b8;outline-offset:8px}
-.portal-paper-bed{position:absolute;inset:3px -4px -5px 3px;z-index:0;border:1px solid #9e885f;border-radius:3px 8px 8px 3px;background:repeating-linear-gradient(0deg,#ecdfc2 0 2px,#bfae8b 2px 3px);box-shadow:4px 7px 8px #26150d66}
-.portal-cover{position:absolute;inset:0;z-index:30;border-radius:3px 7px 7px 3px;overflow:hidden;background:#102238;color:#e9cf93;transform-origin:left center;transform:scaleX(1);box-shadow:0 0 0 1px #efcf8b,0 0 12px #ffe2a64d,5px 8px 12px #29150f66;opacity:1}
+/* A substantial bound volume: lower cover, cream page block and rounded spine. */
+.portal-back-board{position:absolute;inset:12px -10px -56px -5px;z-index:0;border:2px solid #091624;border-radius:6px 10px 10px 6px;background:linear-gradient(90deg,#091727,#263e54 12%,#12283d 90%,#071521);box-shadow:2px 5px 0 #08121e,7px 14px 18px #20100870;pointer-events:none;transition:bottom .85s cubic-bezier(.22,.6,.3,1)}
+.portal-paper-bed{position:absolute;inset:16px -6px -43px 7px;z-index:0;border:1px solid #9e885f;border-radius:3px 6px 7px 3px;background:linear-gradient(90deg,#81633b44,transparent 12%,transparent 85%,#fff0c14d),repeating-linear-gradient(0deg,#dfcda5 0 2px,#f3e7cc 2px 4px,#ad946b 4px 5px);box-shadow:inset 0 -6px 8px #61432440,3px 2px 0 #b49c71;pointer-events:none;transition:bottom .85s cubic-bezier(.22,.6,.3,1)}
+.portal-spine{position:absolute;left:-7px;top:3px;bottom:-51px;width:17px;z-index:2;border:1px solid #071522;border-radius:7px 2px 3px 7px;background:linear-gradient(90deg,#071521,#2c4358 55%,#102337);box-shadow:inset 2px 0 2px #c4b17a33;pointer-events:none;transition:opacity .25s ease}
+.portal-spine::before{content:'';position:absolute;inset:32px 0;background:linear-gradient(0deg,transparent 0 17%,#b89a5866 17% 18%,transparent 18% 82%,#b89a5866 82% 83%,transparent 83%)}
+#entrance.unsealing .portal-back-board{bottom:-19px}
+#entrance.unsealing .portal-paper-bed{bottom:-12px}
+#entrance.unsealing .portal-spine{opacity:0}
+.portal-cover{position:absolute;inset:0;z-index:30;border-radius:3px 7px 7px 3px;overflow:visible;background:#102238;color:#e9cf93;transform-origin:left center;transform:scaleX(1);box-shadow:0 0 0 1px #efcf8b,0 0 12px #ffe2a64d,5px 8px 12px #29150f66;opacity:1}
+/* Both sides of the hardcover share a solid rim and a visible board edge. */
+.portal-cover::before{content:'';position:absolute;inset:-3px -7px -13px -4px;border:2px solid #091522;border-radius:5px 9px 9px 5px;background:linear-gradient(90deg,#0b1a2b,#345069 12%,#142b40 85%,#091522);box-shadow:0 3px 0 #091321,3px 6px 7px #1c100d60}
+.portal-cover::after{content:'';position:absolute;left:0;right:-4px;bottom:-10px;height:10px;border-radius:0 0 6px 3px;background:linear-gradient(#3a5062,#132a3e 35%,#091727);pointer-events:none}
+.portal-cover-front,.portal-cover-lining{position:absolute;inset:0;border-radius:3px 7px 7px 3px;overflow:hidden}
+.portal-cover-front{z-index:2;background:#102238}
+.portal-cover-lining{display:flex;align-items:center;justify-content:center;border:6px solid #172e43;background:linear-gradient(90deg,#c6ae84,#eee0bf 16%,#e2cfaa);color:#9b7e4a;opacity:0;box-shadow:inset 0 0 0 1px #b49460,inset -8px 0 15px #5e402e33}
+.portal-cover-lining span{font:42px var(--serif)}
+#entrance.unsealing .portal-cover-front{animation:portalCoverFront .95s linear forwards;animation-play-state:running!important}
+#entrance.unsealing .portal-cover-lining{animation:portalCoverLining .95s linear forwards;animation-play-state:running!important}
+@keyframes portalCoverFront{0%,42%{opacity:1}48%,100%{opacity:0}}
+@keyframes portalCoverLining{0%,48%{opacity:0}55%,100%{opacity:1}}
+#entrance.closing-cover .portal-cover{animation:portalCoverClose .9s cubic-bezier(.25,.12,.3,1) both;animation-play-state:running!important}
+#entrance.closing-cover .portal-cover-front{animation:portalCoverFront .9s linear reverse both;animation-play-state:running!important}
+#entrance.closing-cover .portal-cover-lining{animation:portalCoverLining .9s linear reverse both;animation-play-state:running!important}
+@keyframes portalCoverClose{0%{transform:scaleX(-1) skewY(0);z-index:0}45%{transform:scaleX(-.035) skewY(3deg);z-index:30}55%{transform:scaleX(.14) skewY(-3deg);z-index:30}100%{transform:scaleX(1) skewY(0);z-index:30}}
 .portal-cover-art{display:block;width:100%;height:100%;position:absolute;inset:0;pointer-events:none}
 .portal-edition,.portal-title,.portal-author,.portal-imprint{position:absolute;left:24px;right:24px;display:block;text-align:center}
 .portal-edition{top:52px;font-size:7px;letter-spacing:2.6px}
@@ -53,7 +75,7 @@
 #entrance.pages-turning .portal-leaf>span{animation:portalPageInk .95s linear both;animation-delay:calc(var(--page)*.22s);animation-play-state:running!important}
 #entrance .book-hint{z-index:7;bottom:66px;color:#ffedc6;text-shadow:0 2px 9px #251409;font-size:9px;letter-spacing:2.3px;transition:opacity .4s}
 #entrance.lifting .book-hint{opacity:0}
-@keyframes portalCoverOpen{0%{transform:scaleX(1);opacity:1}48%{transform:scaleX(.035);opacity:1}49%{transform:scaleX(.01);opacity:0}100%{transform:scaleX(0);opacity:0}}
+@keyframes portalCoverOpen{0%{transform:scaleX(1) skewY(0);z-index:30}45%{transform:scaleX(.035) skewY(-3deg);z-index:30}55%{transform:scaleX(-.14) skewY(3deg);z-index:30}100%{transform:scaleX(-1) skewY(0);z-index:0}}
 @keyframes portalPageTurn{0%{visibility:hidden;transform:scaleX(1) skewY(0)}1%{visibility:visible}44%{transform:scaleX(.035) skewY(-4deg)}55%{transform:scaleX(-.14) skewY(3deg)}99%{visibility:visible;transform:scaleX(-1) skewY(0)}100%{visibility:hidden;transform:scaleX(-1) skewY(0)}}
 @keyframes portalPageInk{0%,34%{opacity:1}46%,100%{opacity:0}}
 @keyframes portalFloat{0%,100%{transform:translateY(0) rotate(.3deg)}50%{transform:translateY(-10px) rotate(-.35deg)}}
@@ -64,8 +86,8 @@
 @media(prefers-reduced-motion:reduce){#entrance .room-scene,#entrance .overhead-scene,#entrance .portal-stage,.portal-book,.portal-left{transition:none}.desk-sunlight,#entrance.in-room .portal-float{animation:none}}
 
 /* Prepaint the hover halo; animate only its opacity. */
-.portal-book::before{content:'';position:absolute;inset:-9px;z-index:-1;border-radius:10px;background:radial-gradient(ellipse,#ffe7a633,transparent 75%);box-shadow:0 0 22px 8px #ffdb8b66,0 0 64px 20px #f5cf7340;opacity:0;transition:opacity .3s ease;pointer-events:none}
-.portal-book::after{content:'';position:absolute;inset:-2px;z-index:40;border:2px solid #fff0bf;border-radius:4px 8px 8px 4px;box-shadow:0 0 10px #ffe3a6aa;opacity:0;transition:opacity .3s ease;pointer-events:none}
+.portal-book::before{content:'';position:absolute;inset:-9px;z-index:-1;border-radius:10px;background:radial-gradient(ellipse,#ffe7a633,transparent 75%);box-shadow:0 0 24px 10px #ffdb8b80,0 0 58px 18px #f5cf7355;opacity:0;transition:opacity .12s ease-out;pointer-events:none}
+.portal-book::after{content:'';position:absolute;inset:-2px;z-index:40;border:2px solid #fff0bf;border-radius:4px 8px 8px 4px;box-shadow:0 0 10px #ffe3a6aa;opacity:0;transition:opacity .12s ease-out;pointer-events:none}
 #entrance:not(.lifting) .portal-book[aria-disabled="false"]:focus-visible::before,#entrance:not(.lifting) .portal-book[aria-disabled="false"]:focus-visible::after{opacity:1}
 @media(hover:hover){#entrance:not(.lifting) .portal-book[aria-disabled="false"]:hover::before,#entrance:not(.lifting) .portal-book[aria-disabled="false"]:hover::after{opacity:1}}
 /* Keep camera changes on compositor layers and idle unseen scenery. */

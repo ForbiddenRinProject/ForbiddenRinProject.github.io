@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="cinematic.css">
   <link rel="stylesheet" href="garden.css">
   <link rel="stylesheet" href="living-scene.css">
-  <link rel="stylesheet" href="entrance.css?v=glow-smooth-20261013">
+  <link rel="stylesheet" href="entrance.css?v=bound-book-4">
   <link rel="stylesheet" href="desk-atmosphere.css?v=smooth-20261013">
   <script src="desk-atmosphere.js?v=smooth-20261013" defer></script>
-  <link rel="stylesheet" href="room-reader.css?v=room-first-1">
-  <script src="app.js?v=room-first-1" defer></script>
+  <link rel="stylesheet" href="room-reader.css?v=bound-book-4">
+  <script src="app.js?v=bound-book-4" defer></script>
 </head>
 <body class="intro-active">
   <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -101,6 +101,8 @@
       <div class="portal-glow" aria-hidden="true"></div>
       <div class="portal-float">
         <div id="book" class="portal-book" role="button" tabindex="0" aria-disabled="false" aria-label="Open Forbidden and begin reading">
+          <div class="portal-back-board" aria-hidden="true"></div>
+          <div class="portal-spine" aria-hidden="true"></div>
           <div class="portal-paper-bed" aria-hidden="true"></div>
           <div class="portal-spread" aria-hidden="true">
             <div class="portal-page portal-left"><span class="portal-page-star">✧</span><p>Every world<br>begins with a page.</p><small>A WORLD WITHIN</small></div>
@@ -112,14 +114,18 @@
           <div class="portal-leaf" style="--page:3" aria-hidden="true"><span>The world</span><i></i><i></i><i></i><i></i></div>
           <div class="portal-leaf" style="--page:4" aria-hidden="true"><span>Begin your journey</span><i></i><i></i><i></i><i></i></div>
           <div class="portal-cover" aria-hidden="true">
-            <img class="portal-cover-art" src="assets/forbidden-cover.svg" alt="" width="270" height="382" draggable="false">
-            <span class="portal-edition">A WORLD WITHIN</span>
-            <span class="portal-title" data-title>Forbidden</span>
-            <span class="portal-author" data-author>Rin</span>
-            <span class="portal-imprint">✧ &nbsp; THE STORY AWAITS &nbsp; ✧</span>
+            <div class="portal-cover-lining"><span>✧</span></div>
+            <div class="portal-cover-front">
+              <img class="portal-cover-art" src="assets/forbidden-cover.svg" alt="" width="270" height="382" draggable="false">
+              <span class="portal-edition">A WORLD WITHIN</span>
+              <span class="portal-title" data-title>Forbidden</span>
+              <span class="portal-author" data-author>Rin</span>
+              <span class="portal-imprint">✧ &nbsp; THE STORY AWAITS &nbsp; ✧</span>
+            </div>
           </div>
         </div>
       </div>
+      <div id="book-reading-preview" class="portal-reader-preview" aria-hidden="true" inert></div>
     </div>
     <div id="book-hint" class="book-hint"><span></span> OPEN THE BOOK <span></span></div>
     <footer class="entrance-footer"><span>STORY · CHARACTERS · WORLD</span><span>YOUR STORY IS WAITING ON THE DESK.</span></footer>
@@ -129,7 +135,7 @@
     <header class="site-header">
       <a href="#home" class="wordmark"><span data-title>Forbidden</span><small>R I N</small></a>
       <nav aria-label="Main navigation">
-        <a href="#home" data-route="home" class="active">The beginning</a>
+        <a href="#room" data-route="room">The room</a>
         <a href="#story" data-route="story">Story</a>
         <a href="#characters" data-route="characters">Characters</a>
         <a href="#world" data-route="world">World map</a>

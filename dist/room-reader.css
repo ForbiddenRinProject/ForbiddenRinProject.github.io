@@ -2,8 +2,8 @@
 #entrance.in-room .room-scene { opacity: 1; transform: none; }
 #entrance.in-room .overhead-scene { opacity: 0; transform: scale(1.12); }
 #entrance.in-room .portal-stage {
-  left: var(--desk-book-x); top: var(--desk-book-y);
-  transform: translate(-50%, -50%) perspective(1000px) rotateX(62deg) rotateZ(-7deg) scale(var(--closed-book-scale));
+  left: 50%; top: 52%;
+  transform: translate(-50%, -50%) translate(var(--desk-book-offset-x), var(--desk-book-offset-y)) perspective(1000px) rotateX(62deg) rotateZ(-7deg) scale(var(--closed-book-scale));
   transition: none;
 }
 #entrance.in-room .portal-float { animation: none; }
@@ -12,15 +12,25 @@
 #entrance.reading-desk .overhead-scene { opacity: 1; transform: scale(1); }
 #entrance.reading-desk .portal-stage {
   left: 50%; top: 52%;
-  transform: translate(-50%, -50%) rotate(0deg) scale(var(--open-book-scale));
-  transition: transform 1.2s cubic-bezier(.22,.6,.3,1), left 1.2s ease, top 1.2s ease;
+  transform: translate(-50%, -50%) translate(0px, 0px) perspective(1000px) rotateX(0deg) rotateZ(0deg) scale(var(--open-book-scale));
+  transition: transform 1.3s cubic-bezier(.22,.6,.3,1);
 }
 #entrance.reading-desk .portal-shadow { opacity: .2; }
+#entrance.returning-to-room .portal-stage { transition: transform 1.5s cubic-bezier(.22,.6,.3,1); }
+#entrance.returning-to-room .entrance-header,
+#entrance.returning-to-room .entrance-footer,
+#entrance.returning-to-room .book-hint { opacity: 0; }
 #entrance.camera-in .portal-stage {
-  transform: translate(-50%, -50%) scale(var(--book-camera-scale));
+  transform: translate(-50%, -50%) translate(var(--reader-camera-x), var(--reader-camera-y)) perspective(1000px) rotateX(0deg) rotateZ(0deg) scale(var(--reader-camera-scale-x), var(--reader-camera-scale-y));
   transition: transform 1.5s cubic-bezier(.3,.05,.25,1);
 }
-#entrance.camera-in .overhead-scene { transform: scale(1.35); }
+#entrance.camera-in .overhead-scene { transform: scale(1); }
+#entrance.reading-desk .entrance-vignette { opacity: 0; transition: opacity 1.3s ease; }
+.portal-float { transition: opacity .3s ease; }
+.portal-reader-preview { position: absolute; inset: 0; z-index: 3; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.portal-reader-preview > .reader-layout { transform-origin: top left; }
+#entrance.camera-in .portal-float { opacity: 0; }
+#entrance.camera-in .portal-reader-preview { opacity: 1; }
 #entrance.camera-in .portal-glow { opacity: 0; animation: none; }
 #entrance.camera-in .entrance-header,
 #entrance.camera-in .entrance-footer { opacity: 0; transition: opacity .4s; }
@@ -35,7 +45,7 @@ body.reading-book .site-header {
 }
 #story-view {
   padding: 135px 5% 75px;
-  background: linear-gradient(#32221655, #32221680), url('assets/overhead-desk.webp') center / cover fixed;
+  background: url('assets/overhead-desk.webp') center / cover fixed;
   min-height: 100svh;
 }
 #story-view > .view-banner {
@@ -90,6 +100,7 @@ body.reading-night .chapter-sidebar .muted { color: #c3b18b; }
   .book-title { font-size: 28px; margin: 0 0 5px; }
   .book-author { font-size: 14px; margin: 0; }
   .chapter-sidebar .sidebar-label { margin-bottom: 10px; }
+  .portal-reader-preview [data-preview-chapter-list] { display: flex; overflow: auto; gap: 6px; }
   .reader-toolbar { padding: 12px 18px; }
   .reader-page { min-height: 420px; padding: 32px 25px 45px; }
   .reader-page .empty-reader { min-height: 330px; }

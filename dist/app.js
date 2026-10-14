@@ -6,7 +6,7 @@
   const KEYS = { draft: 'forbidden.content.v1', prefs: 'forbidden.preferences.v1', progress: 'forbidden.progress.v1' };
   const fallback = { title: 'Forbidden', author: 'Rin', tagline: 'A world within the pages.', description: 'Open the book. Discover its characters. Explore the world beyond the words.', chapters: [], characters: [], map: { image: '', title: 'The world of Forbidden', description: '', locations: [] } };
   let data = structuredClone(fallback), activeChapter = null, activeCharacter = null, activeLocation = null;
-  let route = 'home', entered = false, entering = false, flashTimer, entranceHideTimer, toastTimer;
+  let route = 'home', entered = false, entering = false, returning = false, flashTimer, entranceHideTimer, toastTimer;
   const introTimers = new Set();
   let pendingPortrait = '', pendingMap = '', storageWarning = false;
   const uid = () => globalThis.crypto?.randomUUID?.() || `item-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -107,18 +107,45 @@
     const height = window.innerHeight || entrance.clientHeight || 1;
     // Match the book to the desk in the cover-cropped 1672 × 941 room artwork.
     const roomScale = Math.max(width / 1672, height / 941);
-    const deskX = width / 2 + (836 - 836) * roomScale;
+    const deskX = width / 2;
     const deskY = height / 2 + (705 - 470.5) * roomScale;
     const closedScale = Math.max(.24, Math.min(.5 * roomScale, (width - 44) / 300));
     const openScale = Math.max(.25, Math.min(1.1, (width - 44) / 575, (height - 155) / 415));
-    entrance.style.setProperty('--desk-book-x', `${deskX}px`);
-    entrance.style.setProperty('--desk-book-y', `${deskY}px`);
+    entrance.style.setProperty('--desk-book-offset-x', `${deskX - width / 2}px`);
+    entrance.style.setProperty('--desk-book-offset-y', `${deskY - height * .52}px`);
     entrance.style.setProperty('--closed-book-scale', String(closedScale));
     entrance.style.setProperty('--open-book-scale', String(openScale));
-    entrance.style.setProperty('--book-camera-scale', String(Math.max(openScale, width / 540, height / 376) * 1.12));
+    if (entering && $('#book-reading-preview').firstElementChild) sizeReadingCamera();
   }
   sizeEntranceBook();
   window.addEventListener('resize', sizeEntranceBook);
+  function sizeReadingCamera() {
+    const entrance = $('#entrance');
+    const spread = $('#story-view .reader-layout').getBoundingClientRect();
+    const preview = $('#book-reading-preview').firstElementChild;
+    if (!preview || !spread.width || !spread.height) return;
+    preview.style.width = `${spread.width}px`;
+    preview.style.height = `${spread.height}px`;
+    preview.style.transform = `scale(${540 / spread.width}, ${382 / spread.height})`;
+    entrance.style.setProperty('--reader-camera-x', `${spread.left + spread.width / 2 - innerWidth / 2}px`);
+    entrance.style.setProperty('--reader-camera-y', `${spread.top + spread.height / 2 - innerHeight * .52}px`);
+    entrance.style.setProperty('--reader-camera-scale-x', String(spread.width / 540));
+    entrance.style.setProperty('--reader-camera-scale-y', String(spread.height / 382));
+  }
+  function prepareReadingCamera() {
+    // Render the same spread in the camera shot and the live reader for a seamless handoff.
+    showRoute('story');
+    const preview = $('#story-view .reader-layout').cloneNode(true);
+    preview.removeAttribute('id');
+    preview.querySelectorAll('[id]').forEach(el => {
+      if (el.id === 'chapter-list') el.setAttribute('data-preview-chapter-list', '');
+      el.removeAttribute('id');
+    });
+    preview.style.margin = '0';
+    preview.style.maxWidth = 'none';
+    $('#book-reading-preview').replaceChildren(preview);
+    sizeReadingCamera();
+  }
   function environmentalMotionPaused() { return !!prefs.paused || (reducedSceneMotion.matches && !prefs.motionOverride); }
   function syncSceneMotion() {
     const paused = environmentalMotionPaused() || document.hidden;
@@ -167,7 +194,7 @@
     const motionPaused = environmentalMotionPaused();
     document.body.classList.toggle('motion-paused', motionPaused);
     document.body.classList.toggle('reading-night', !!prefs.night);
-    $('.reader-container').classList.toggle('night', !!prefs.night);
+    $('#story-view .reader-container').classList.toggle('night', !!prefs.night);
     $('#reader-page').style.setProperty('--reader-font', `${prefs.font}px`);
     $('#reader-theme').textContent = prefs.night ? '☀' : '☾';
     $('#reader-theme').setAttribute('aria-label', prefs.night ? 'Switch to parchment reading' : 'Switch to night reading');
@@ -233,7 +260,7 @@
   function revealSite(target = 'home', fromFlash = false) {
     cancelIntroSequence();
     window.ForbiddenAtmosphere?.setVisible(false);
-    entered = true; entering = false;
+    entered = true; entering = false; returning = false;
     clearTimeout(entranceHideTimer);
     if (fromFlash) { $('#site').classList.add('flash-reveal'); $('#entrance').classList.add('flash-covered'); }
     else { resetFlash(); stopIntroSound(); }
@@ -241,7 +268,10 @@
     $('#entrance').classList.add('departing'); $('#entrance').inert = true; $('#entrance').setAttribute('aria-hidden', 'true');
     document.body.classList.remove('intro-active');
     syncSceneMotion();
-    showRoute(target, true); entranceHideTimer = setTimeout(() => { $('#entrance').hidden = true; }, 900);
+    showRoute(target, true); entranceHideTimer = setTimeout(() => {
+      $('#entrance').hidden = true;
+      $('#book-reading-preview').replaceChildren();
+    }, 900);
   }
   function enterReadingView() {
     history.replaceState(null, '', '#story');
@@ -266,6 +296,7 @@
       entrance.classList.remove('scene-transition');
     });
     introStep(3500, () => {
+      prepareReadingCamera();
       entrance.classList.add('camera-in', 'scene-transition');
       syncSceneMotion();
     });
@@ -276,19 +307,55 @@
     if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); openBook(); }
   });
   $$('[data-skip]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); playMusic(); enterReadingView(); }));
-  $('#replay-intro').addEventListener('click', () => {
+  function resetRoom() {
     stopIntroSound();
     cancelIntroSequence();
     clearTimeout(entranceHideTimer); resetFlash();
-    entered = false; entering = false; history.replaceState(null, '', location.pathname + location.search); $('#entrance').hidden = false;
-    $('#entrance').classList.remove('departing', 'lifting', 'unsealing', 'pages-turning', 'scene-transition', 'overhead-retired', 'reading-desk', 'camera-in'); $('#entrance').inert = false; $('#entrance').removeAttribute('aria-hidden');
+    entered = false; entering = false; returning = false; history.replaceState(null, '', '#room'); $('#entrance').hidden = false;
+    $('#entrance').classList.remove('departing', 'lifting', 'unsealing', 'pages-turning', 'scene-transition', 'overhead-retired', 'reading-desk', 'camera-in', 'closing-cover', 'returning-to-room'); $('#entrance').inert = false; $('#entrance').removeAttribute('aria-hidden');
     $('#site').inert = true; $('#site').setAttribute('aria-hidden', 'true'); $('#site').classList.remove('ready');
     document.body.classList.add('intro-active');
     document.body.classList.remove('reading-book');
+    $('#book-reading-preview').replaceChildren();
     window.ForbiddenAtmosphere?.setVisible(true); syncSceneMotion();
     $('#book').setAttribute('aria-disabled', 'false'); $('#book').tabIndex = 0; $('#book-hint').replaceChildren(textNode('span', ''), document.createTextNode(' OPEN THE BOOK '), textNode('span', '')); sizeEntranceBook(); window.scrollTo(0, 0); $('#book').focus();
-  });
+  }
+  function returnToRoom() {
+    if (returning) return;
+    if (reducedSceneMotion.matches) { resetRoom(); return; }
+    if (!entered && !entering) { resetRoom(); return; }
+    cancelIntroSequence();
+    clearTimeout(entranceHideTimer);
+    stopIntroSound(); resetFlash();
+    prepareReadingCamera();
+    entered = false; entering = true; returning = true;
+    const entrance = $('#entrance');
+    entrance.hidden = false;
+    entrance.classList.remove('departing', 'closing-cover', 'pages-turning');
+    entrance.classList.add('in-room', 'reading-desk', 'unsealing', 'camera-in', 'returning-to-room', 'scene-transition');
+    entrance.inert = true;
+    $('#site').inert = true; $('#site').setAttribute('aria-hidden', 'true'); $('#site').classList.remove('ready');
+    $('#book').setAttribute('aria-disabled', 'true'); $('#book').tabIndex = -1;
+    document.body.classList.add('intro-active');
+    document.body.classList.remove('reading-book');
+    history.replaceState(null, '', '#room');
+    syncSceneMotion();
+    // Commit the fully open camera position before animating back toward the desk.
+    entrance.getBoundingClientRect();
+    introStep(60, () => entrance.classList.remove('camera-in'));
+    introStep(1700, () => {
+      entrance.classList.remove('unsealing', 'pages-turning');
+      entrance.classList.add('closing-cover');
+    });
+    introStep(2700, () => {
+      entrance.classList.remove('reading-desk', 'lifting', 'closing-cover');
+      $('#book-reading-preview').replaceChildren();
+    });
+    introStep(4100, resetRoom);
+  }
+  $('#replay-intro').addEventListener('click', returnToRoom);
   function showRoute(next, focus = false) {
+    if (next === 'room') { returnToRoom(); return; }
     if (!['home', 'story', 'characters', 'world'].includes(next)) next = 'home';
     const changed = route !== next;
     route = next;
@@ -301,7 +368,7 @@
     if (next === 'world') requestAnimationFrame(sizePins);
     if (focus) { const heading = $(`#${next}-view h1`); heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
   }
-  window.addEventListener('hashchange', () => { const target = location.hash.slice(1); if (target === 'discover') return; if (!entered) revealSite(target); else showRoute(target, true); });
+  window.addEventListener('hashchange', () => { const target = location.hash.slice(1); if (target === 'discover') return; if (target === 'room') { returnToRoom(); return; } if (!entered) revealSite(target); else showRoute(target, true); });
   $$('a[href^="#"]').filter(el => !el.hasAttribute('data-skip')).forEach(el => el.addEventListener('click', () => { const dest = el.getAttribute('href').slice(1); if (entered && dest === route) showRoute(dest, true); }));
 
   function renderStory() {
