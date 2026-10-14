@@ -3,6 +3,14 @@
 Exported from published version 11, source commit `3310059633083da9c579756aac284c33d5d07bc7`.
 Original site: https://forbidden-rin.foggyeft7.chatgpt.site
 
+## Current entrance and reading view
+
+The site now opens in the illustrated reading room with the book resting on the desk. Trees, water, leaves and sunlight move until paused. Activating the book opens its cover, turns five pages, moves the camera toward the open spread, and enters the Story reader without a white flash. The original overhead desk artwork is reused for the second part of the camera sequence and the reading background.
+
+`dist/room-reader.css` positions the desk book and styles the reader as a bound paper spread. Desktop shows the title/contents leaf beside the reading leaf; small screens use a single-column layout for readable text. Chapters, bookmarks, font size, night reading, Author’s Desk and the other views remain available. Return to the room resets the sequence, and reduced motion enters reading directly.
+
+The ZIP and `EXPORT-MANIFEST.json` preserve the original export; their hashes describe that snapshot, not subsequent development edits. The editable website is `dist/`.
+
 ## Install and run locally
 
 This is a buildless website: **plain HTML, CSS and JavaScript**, with all runtime assets included. The `dist/` directory contains the actual editable source, not compiled or minified framework output. There is no React project, package.json, node_modules, npm installation, API key or backend requirement.

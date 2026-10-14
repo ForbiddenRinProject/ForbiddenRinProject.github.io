@@ -1,0 +1,100 @@
+/* The room is the entrance; the overhead desk becomes the reading camera. */
+#entrance.in-room .room-scene { opacity: 1; transform: none; }
+#entrance.in-room .overhead-scene { opacity: 0; transform: scale(1.12); }
+#entrance.in-room .portal-stage {
+  left: var(--desk-book-x); top: var(--desk-book-y);
+  transform: translate(-50%, -50%) perspective(1000px) rotateX(62deg) rotateZ(-7deg) scale(var(--closed-book-scale));
+  transition: none;
+}
+#entrance.in-room .portal-float { animation: none; }
+#entrance.in-room .portal-shadow { opacity: .7; }
+#entrance.reading-desk .room-scene { opacity: 0; transform: scale(1.18); }
+#entrance.reading-desk .overhead-scene { opacity: 1; transform: scale(1); }
+#entrance.reading-desk .portal-stage {
+  left: 50%; top: 52%;
+  transform: translate(-50%, -50%) rotate(0deg) scale(var(--open-book-scale));
+  transition: transform 1.2s cubic-bezier(.22,.6,.3,1), left 1.2s ease, top 1.2s ease;
+}
+#entrance.reading-desk .portal-shadow { opacity: .2; }
+#entrance.camera-in .portal-stage {
+  transform: translate(-50%, -50%) scale(var(--book-camera-scale));
+  transition: transform 1.5s cubic-bezier(.3,.05,.25,1);
+}
+#entrance.camera-in .overhead-scene { transform: scale(1.35); }
+#entrance.camera-in .portal-glow { opacity: 0; animation: none; }
+#entrance.camera-in .entrance-header,
+#entrance.camera-in .entrance-footer { opacity: 0; transition: opacity .4s; }
+#entrance.departing { transition: opacity .45s; }
+.site { transition: opacity .45s; }
+
+/* A title leaf and a reading leaf, bound together on the original wooden desk. */
+body.reading-book { background: #714426; }
+body.reading-book .site-header {
+  background: linear-gradient(#261a12ee, #261a1280);
+  border-bottom-color: #f0dfb42b;
+}
+#story-view {
+  padding: 135px 5% 75px;
+  background: linear-gradient(#32221655, #32221680), url('assets/overhead-desk.webp') center / cover fixed;
+  min-height: 100svh;
+}
+#story-view > .view-banner {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);
+}
+.reader-layout {
+  position: relative; max-width: 1200px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0;
+  border: 7px solid #263344; border-bottom-width: 12px; border-radius: 9px 15px 15px 9px;
+  box-shadow: 0 28px 65px #24150ac0, 0 4px 0 #c7b28e, 0 7px 0 #e2d2b1, 0 10px 0 #9b7950;
+  background: #f1e5cc;
+}
+.reader-layout::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 28px;
+  transform: translateX(-50%); pointer-events: none; z-index: 2;
+  background: linear-gradient(90deg, transparent, #6b4b252b 40%, #4b331e66 50%, #6b4b252b 60%, transparent);
+}
+.chapter-sidebar {
+  padding: 48px clamp(22px, 4vw, 58px);
+  background: linear-gradient(90deg, #e3d1ac, #f4e9cf 14%, #f5ebd5 78%, #dcc6a0);
+  color: #55432b; border-radius: 2px 0 0 2px; min-width: 0;
+}
+.book-title-page { text-align: center; padding: 12px 0 42px; }
+.book-title-ornament { font: 44px var(--serif); color: #a38145; }
+.book-title { font: clamp(30px, 3.5vw, 54px)/1.2 var(--serif); text-transform: uppercase; letter-spacing: 2px; margin: 28px 0 15px; overflow-wrap: anywhere; }
+.book-author { font: italic 17px var(--serif); color: #86704d; }
+.book-title-rule { display: block; width: 70px; height: 1px; background: #ad8d55; margin: 32px auto 0; }
+.chapter-sidebar .sidebar-label { color: #856d45; font-size: 9px; }
+.chapter-sidebar .muted { color: #8c7a60; padding: 0; }
+.chapter-sidebar .chapter-button { color: #67543c; border-left-color: #af936455; }
+.chapter-sidebar .chapter-button small { color: #8c7751; }
+.chapter-sidebar .chapter-button.active { color: #50391c; background: #b08c4220; border-color: #9c7842; }
+.reader-container {
+  min-width: 0; border: 0; box-shadow: none; border-radius: 0 7px 7px 0;
+  background: linear-gradient(90deg, #d9c39b, #f4e9d0 10%, #f5ebd6 85%, #ead9b7);
+}
+.reader-toolbar { padding: 20px 25px; }
+.reader-page { min-height: 520px; padding: 50px clamp(25px, 4vw, 60px) 65px; }
+.reader-page .empty-reader { min-height: 410px; }
+body.reading-book .site-footer { background: #291c13; border-color: #e4cca32b; }
+body.reading-night .chapter-sidebar { color: #e3dcc8; background: linear-gradient(90deg, #192b3a, #23384a 75%, #122331); }
+body.reading-night .book-author,
+body.reading-night .chapter-sidebar .chapter-button,
+body.reading-night .chapter-sidebar .muted { color: #c3b18b; }
+
+@media (max-width: 760px) {
+  #story-view { padding: 142px 4% 45px; }
+  .reader-layout { grid-template-columns: minmax(0, 1fr); border-width: 5px; border-bottom-width: 9px; }
+  .reader-layout::after { left: 0; transform: none; width: 13px; background: linear-gradient(90deg, #70512555, transparent); }
+  .chapter-sidebar { padding: 20px 25px; border-bottom: 1px solid #a7895240; }
+  .book-title-page { padding: 0 0 16px; }
+  .book-title-ornament, .book-title-rule { display: none; }
+  .book-title { font-size: 28px; margin: 0 0 5px; }
+  .book-author { font-size: 14px; margin: 0; }
+  .chapter-sidebar .sidebar-label { margin-bottom: 10px; }
+  .reader-toolbar { padding: 12px 18px; }
+  .reader-page { min-height: 420px; padding: 32px 25px 45px; }
+  .reader-page .empty-reader { min-height: 330px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #entrance.in-room .portal-stage, #entrance.camera-in .portal-stage,
+  #entrance .room-scene, #entrance .overhead-scene, #entrance.departing, .site { transition: none; }
+}

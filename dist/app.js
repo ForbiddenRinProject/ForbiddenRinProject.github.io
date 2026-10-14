@@ -105,10 +105,17 @@
     const entrance = $('#entrance');
     const width = window.innerWidth || entrance.clientWidth || 1;
     const height = window.innerHeight || entrance.clientHeight || 1;
-    const closedScale = Math.max(.25, Math.min(1.2, (width - 70) / 320, (height - 155) / 420));
+    // Match the book to the desk in the cover-cropped 1672 × 941 room artwork.
+    const roomScale = Math.max(width / 1672, height / 941);
+    const deskX = width / 2 + (836 - 836) * roomScale;
+    const deskY = height / 2 + (705 - 470.5) * roomScale;
+    const closedScale = Math.max(.24, Math.min(.5 * roomScale, (width - 44) / 300));
     const openScale = Math.max(.25, Math.min(1.1, (width - 44) / 575, (height - 155) / 415));
+    entrance.style.setProperty('--desk-book-x', `${deskX}px`);
+    entrance.style.setProperty('--desk-book-y', `${deskY}px`);
     entrance.style.setProperty('--closed-book-scale', String(closedScale));
     entrance.style.setProperty('--open-book-scale', String(openScale));
+    entrance.style.setProperty('--book-camera-scale', String(Math.max(openScale, width / 540, height / 376) * 1.12));
   }
   sizeEntranceBook();
   window.addEventListener('resize', sizeEntranceBook);
@@ -120,7 +127,7 @@
     const roomRunning = !paused && !entered && entrance.classList.contains('in-room') && !entrance.classList.contains('scene-transition');
     const method = roomRunning ? 'unpauseAnimations' : 'pauseAnimations';
     if (scene && typeof scene[method] === 'function') scene[method]();
-    window.ForbiddenAtmosphere?.setMotionEnabled(!paused && !entering);
+    window.ForbiddenAtmosphere?.setMotionEnabled(!paused && entrance.classList.contains('reading-desk') && !entering);
   }
   document.addEventListener('visibilitychange', syncSceneMotion);
   if (typeof reducedSceneMotion.addEventListener === 'function') reducedSceneMotion.addEventListener('change', applyPrefs);
@@ -159,6 +166,7 @@
   function applyPrefs() {
     const motionPaused = environmentalMotionPaused();
     document.body.classList.toggle('motion-paused', motionPaused);
+    document.body.classList.toggle('reading-night', !!prefs.night);
     $('.reader-container').classList.toggle('night', !!prefs.night);
     $('#reader-page').style.setProperty('--reader-font', `${prefs.font}px`);
     $('#reader-theme').textContent = prefs.night ? '☀' : '☾';
@@ -235,18 +243,9 @@
     syncSceneMotion();
     showRoute(target, true); entranceHideTimer = setTimeout(() => { $('#entrance').hidden = true; }, 900);
   }
-  function flashIntoHome() {
-    const flash = $('#chapter-flash');
-    flash.classList.remove('is-fading'); flash.classList.add('is-lit');
-    flashTimer = setTimeout(() => {
-      // Change scenes only after the whole screen is solid white.
-      if (location.hash !== '#home') history.replaceState(null, '', '#home');
-      revealSite('home', true);
-      flashTimer = setTimeout(() => {
-        flash.classList.add('is-fading'); flash.classList.remove('is-lit');
-        flashTimer = setTimeout(resetFlash, 1300);
-      }, 200);
-    }, 480);
+  function enterReadingView() {
+    history.replaceState(null, '', '#story');
+    revealSite('story');
   }
   function openBook() {
     if (entering || entered) return;
@@ -254,43 +253,46 @@
     $('#book').setAttribute('aria-disabled', 'true'); $('#book').tabIndex = -1;
     $('#book-hint').textContent = 'THE STORY IS OPENING…';
     if (reducedSceneMotion.matches) {
-      introStep(80, () => { history.replaceState(null, '', '#home'); revealSite('home'); });
+      introStep(80, enterReadingView);
       return;
     }
     const entrance = $('#entrance');
     playIntroSound();
-    entrance.classList.add('lifting', 'scene-transition');
+    entrance.classList.add('lifting', 'reading-desk', 'scene-transition');
     syncSceneMotion();
-    introStep(650, () => entrance.classList.add('in-room'));
-    introStep(2050, () => {
-      entrance.classList.add('unsealing', 'overhead-retired');
+    introStep(300, () => entrance.classList.add('unsealing'));
+    introStep(1300, () => {
+      entrance.classList.add('pages-turning');
       entrance.classList.remove('scene-transition');
-      window.ForbiddenAtmosphere?.setVisible(false); syncSceneMotion();
     });
-    introStep(3150, () => entrance.classList.add('pages-turning'));
-    // The flash reaches white while the final sheets are still turning.
-    introStep(4450, flashIntoHome);
+    introStep(3500, () => {
+      entrance.classList.add('camera-in', 'scene-transition');
+      syncSceneMotion();
+    });
+    introStep(5000, enterReadingView);
   }
   $('#book').addEventListener('click', openBook);
   $('#book').addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); openBook(); }
   });
-  $$('[data-skip]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); playMusic(); history.replaceState(null, '', '#home'); revealSite('home'); }));
+  $$('[data-skip]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); playMusic(); enterReadingView(); }));
   $('#replay-intro').addEventListener('click', () => {
     stopIntroSound();
     cancelIntroSequence();
     clearTimeout(entranceHideTimer); resetFlash();
     entered = false; entering = false; history.replaceState(null, '', location.pathname + location.search); $('#entrance').hidden = false;
-    $('#entrance').classList.remove('departing', 'lifting', 'in-room', 'unsealing', 'pages-turning', 'scene-transition', 'overhead-retired'); $('#entrance').inert = false; $('#entrance').removeAttribute('aria-hidden');
+    $('#entrance').classList.remove('departing', 'lifting', 'unsealing', 'pages-turning', 'scene-transition', 'overhead-retired', 'reading-desk', 'camera-in'); $('#entrance').inert = false; $('#entrance').removeAttribute('aria-hidden');
     $('#site').inert = true; $('#site').setAttribute('aria-hidden', 'true'); $('#site').classList.remove('ready');
     document.body.classList.add('intro-active');
+    document.body.classList.remove('reading-book');
     window.ForbiddenAtmosphere?.setVisible(true); syncSceneMotion();
-    $('#book').setAttribute('aria-disabled', 'false'); $('#book').tabIndex = 0; $('#book-hint').replaceChildren(textNode('span', ''), document.createTextNode(' CLICK TO OPEN '), textNode('span', '')); sizeEntranceBook(); window.scrollTo(0, 0); $('#book').focus();
+    $('#book').setAttribute('aria-disabled', 'false'); $('#book').tabIndex = 0; $('#book-hint').replaceChildren(textNode('span', ''), document.createTextNode(' OPEN THE BOOK '), textNode('span', '')); sizeEntranceBook(); window.scrollTo(0, 0); $('#book').focus();
   });
   function showRoute(next, focus = false) {
     if (!['home', 'story', 'characters', 'world'].includes(next)) next = 'home';
     const changed = route !== next;
     route = next;
+    document.body.classList.toggle('reading-book', route === 'story');
     $$('.view.route-enter').forEach(view => view.classList.remove('route-enter'));
     ['home', 'story', 'characters', 'world'].forEach(r => { $(`#${r}-view`).hidden = r !== route; });
     $$('[data-route]').forEach(el => { const active = el.dataset.route === route; el.classList.toggle('active', active); if (active) el.setAttribute('aria-current', 'page'); else el.removeAttribute('aria-current'); });

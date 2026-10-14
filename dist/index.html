@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="entrance.css?v=glow-smooth-20261013">
   <link rel="stylesheet" href="desk-atmosphere.css?v=smooth-20261013">
   <script src="desk-atmosphere.js?v=smooth-20261013" defer></script>
-  <script src="app.js?v=loop-smooth-20261013" defer></script>
+  <link rel="stylesheet" href="room-reader.css?v=room-first-1">
+  <script src="app.js?v=room-first-1" defer></script>
 </head>
 <body class="intro-active">
   <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +40,7 @@
   <audio id="background-music" src="assets/fantasy-novel-loop.mp3" preload="metadata" loop></audio>
   <audio id="intro-sound" src="assets/book-cinematic.mp3" preload="auto"></audio>
 
-  <section id="entrance" class="entrance" aria-label="Open the book">
+  <section id="entrance" class="entrance in-room" aria-label="Open the book">
     <div class="room-scene" aria-hidden="true">
     <div class="entrance-art"></div>
     <svg class="garden-scene" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
@@ -93,13 +94,13 @@
     <header class="entrance-header">
       <a class="wordmark" href="#home" data-skip><span data-title>Forbidden</span><small>R I N</small></a>
       <span class="edition-label">A WORLD WITHIN THE PAGES</span>
-      <div class="entrance-controls"><button class="music-toggle" data-music-toggle aria-label="Play music and sound effects" aria-pressed="false" title="Play music and sound effects"><svg class="icon"><use href="#i-music"/></svg><span class="music-state">Sound</span></button><button id="entrance-motion-toggle" class="motion-toggle" data-motion-toggle aria-label="Pause environmental motion" title="Pause environmental motion"><span aria-hidden="true">Ⅱ</span></button><button class="text-button skip-button" data-skip>Skip intro <span aria-hidden="true">↗</span></button></div>
+      <div class="entrance-controls"><button class="music-toggle" data-music-toggle aria-label="Play music and sound effects" aria-pressed="false" title="Play music and sound effects"><svg class="icon"><use href="#i-music"/></svg><span class="music-state">Sound</span></button><button id="entrance-motion-toggle" class="motion-toggle" data-motion-toggle aria-label="Pause environmental motion" title="Pause environmental motion"><span aria-hidden="true">Ⅱ</span></button><button class="text-button skip-button" data-skip>Start reading <span aria-hidden="true">↗</span></button></div>
     </header>
     <div class="portal-stage">
       <div class="portal-shadow" aria-hidden="true"></div>
       <div class="portal-glow" aria-hidden="true"></div>
       <div class="portal-float">
-        <div id="book" class="portal-book" role="button" tabindex="0" aria-disabled="false" aria-label="Open Forbidden and enter the website">
+        <div id="book" class="portal-book" role="button" tabindex="0" aria-disabled="false" aria-label="Open Forbidden and begin reading">
           <div class="portal-paper-bed" aria-hidden="true"></div>
           <div class="portal-spread" aria-hidden="true">
             <div class="portal-page portal-left"><span class="portal-page-star">✧</span><p>Every world<br>begins with a page.</p><small>A WORLD WITHIN</small></div>
@@ -120,8 +121,8 @@
         </div>
       </div>
     </div>
-    <div id="book-hint" class="book-hint"><span></span> CLICK TO OPEN <span></span></div>
-    <footer class="entrance-footer"><span>STORY · CHARACTERS · WORLD</span><span>TURN THE PAGE. STEP INSIDE.</span></footer>
+    <div id="book-hint" class="book-hint"><span></span> OPEN THE BOOK <span></span></div>
+    <footer class="entrance-footer"><span>STORY · CHARACTERS · WORLD</span><span>YOUR STORY IS WAITING ON THE DESK.</span></footer>
   </section>
 
   <div id="site" class="site" inert aria-hidden="true">
@@ -163,7 +164,7 @@
       <section id="story-view" class="view story-view" hidden aria-labelledby="story-title">
         <div class="view-banner"><div class="eyebrow">THE WRITTEN WORLD</div><h1 id="story-title">The story</h1><p>Let the rest of the world fall away.</p></div>
         <div class="reader-layout">
-          <aside class="chapter-sidebar"><div class="sidebar-label"><svg class="icon"><use href="#i-book"/></svg> TABLE OF CONTENTS</div><div id="chapter-list"></div><p id="chapter-empty-label" class="muted">The first chapter is on its way.</p></aside>
+          <aside class="chapter-sidebar"><div class="book-title-page"><span class="book-title-ornament" aria-hidden="true">✧</span><p class="book-title" data-title>Forbidden</p><p class="book-author">A story by <span data-author>Rin</span></p><span class="book-title-rule" aria-hidden="true"></span></div><div class="sidebar-label"><svg class="icon"><use href="#i-book"/></svg> TABLE OF CONTENTS</div><div id="chapter-list"></div><p id="chapter-empty-label" class="muted">The first chapter is on its way.</p></aside>
           <div class="reader-container">
             <div class="reader-toolbar"><span id="chapter-indicator">THE OPENING PAGE</span><div class="reader-tools"><button id="font-smaller" aria-label="Decrease reading font size">A−</button><button id="font-larger" aria-label="Increase reading font size">A+</button><button id="reader-theme" aria-label="Switch to night reading" title="Switch reading theme">☾</button><button id="bookmark" aria-label="Save reading position" title="Save reading position">♧</button></div></div>
             <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
@@ -192,7 +193,7 @@
         </div><aside class="atlas-notes"><div class="eyebrow">FIELD NOTES</div><h2 id="location-name">A world of possibilities.</h2><p id="location-description">The places and regions of your story will live here. Select a location on the map to learn more about it.</p><div id="location-list"></div><div class="atlas-note-bottom"><svg class="icon"><use href="#i-compass"/></svg> EVERY PLACE HOLDS A STORY</div></aside></div>
       </section>
     </main>
-    <footer class="site-footer"><a href="#home" class="wordmark"><span data-title>Forbidden</span><small>R I N</small></a><p>A world within the pages.</p><div><button id="replay-intro" class="text-button">Reopen the book</button><button class="text-button" data-desk>Author’s Desk <svg class="icon"><use href="#i-feather"/></svg></button></div><small id="footer-credit">A STORY BY RIN</small></footer>
+    <footer class="site-footer"><a href="#home" class="wordmark"><span data-title>Forbidden</span><small>R I N</small></a><p>A world within the pages.</p><div><button id="replay-intro" class="text-button">Return to the room</button><button class="text-button" data-desk>Author’s Desk <svg class="icon"><use href="#i-feather"/></svg></button></div><small id="footer-credit">A STORY BY RIN</small></footer>
   </div>
 
   <dialog id="author-desk" class="author-desk" aria-labelledby="desk-title">
