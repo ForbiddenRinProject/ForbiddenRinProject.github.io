@@ -1,0 +1,41 @@
+/* The illustrated room is still; the book and garden have their own living layers. */
+.entrance-art{background-image:url('assets/reading-room-v2.webp');background-position:center;background-size:cover;filter:brightness(.94) saturate(1.02);transform:none}
+.garden-scene{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:brightness(.94) saturate(1.02);overflow:hidden}
+.entrance-vignette{background:linear-gradient(0deg,#09111e5c,transparent 26%,transparent 76%,#0913227a),radial-gradient(ellipse at 50% 50%,transparent 50%,#09132320)}
+.entrance-layout{inset:0;display:block;padding:0}
+.entrance-layout .book-stage{position:absolute;left:var(--table-book-x,54.1%);top:var(--table-book-y,74.7%);width:580px;height:590px;min-height:0;max-height:none;transform:translate(-50%,-50%) scale(var(--room-scale,1));transform-origin:center;perspective:1700px;align-self:auto}
+#entrance .book{width:270px;height:382px;transform:rotateX(77deg) rotateY(-4deg) rotateZ(-9deg) scale(.52);transition:transform 1.4s cubic-bezier(.22,.6,.3,1);animation:none}
+#entrance .book-hover{animation:none;will-change:auto}
+#entrance .book-back{box-shadow:3px 8px 10px #321a0c65}
+.book-contact-shadow{position:absolute;left:50%;top:calc(50% + 18px);width:185px;height:55px;border-radius:50%;transform:translate(-50%,-50%) rotate(-7deg);background:radial-gradient(ellipse,#28140975,transparent 70%);filter:blur(4px);pointer-events:none;opacity:.8}
+.entrance:not(.opening) .celestial-ring,.entrance:not(.opening) .orbit-star,.entrance:not(.opening) .book-aura{visibility:hidden;opacity:0}
+.entrance.opening .book-stage{left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--reading-scale,1));transition:left 1.3s cubic-bezier(.22,.6,.3,1),top 1.3s cubic-bezier(.22,.6,.3,1),transform 1.3s cubic-bezier(.22,.6,.3,1)}
+#entrance.opening .book.open{transform:translateX(49%) rotateX(8deg) rotateY(-10deg) scale(1)}
+#entrance.opening .book-hover{animation:readingBookDrift 6s 1.4s ease-in-out infinite;will-change:transform}
+.entrance.opening .book-contact-shadow{opacity:0;transition:opacity .45s}
+.entrance.opening .celestial-ring,.entrance.opening .orbit-star{visibility:visible;opacity:.45;transition:opacity .9s .3s}
+.entrance.opening .book-aura{visibility:visible;opacity:1;background:radial-gradient(ellipse,#eece792f,transparent 68%)}
+.book-hint{position:absolute;left:50%;bottom:66px;transform:translateX(-50%);color:#f0dfb4;text-shadow:0 1px 8px #071423;font-size:8px;letter-spacing:2px;white-space:nowrap}
+.book-hint span{background:#d6bd8875}
+.entrance.opening .book-hint{opacity:0}
+.garden-tree,.garden-clouds,.garden-flower-breeze{transform-box:view-box;will-change:transform}
+.garden-tree-left{transform-origin:683px 531px;animation:gardenBreezeLeft 8.5s ease-in-out infinite}
+.garden-tree-right{transform-origin:1047px 551px;animation:gardenBreezeRight 10.7s -3.7s ease-in-out infinite}
+.garden-flower-breeze{transform-origin:866px 630px;animation:flowerBreeze 6.7s -2s ease-in-out infinite}
+.garden-clouds{animation:skyDrift 28s ease-in-out infinite}
+.garden-sunbeam{opacity:.13;animation:sunlightBreathe 13s -4s ease-in-out infinite}
+.garden-water{fill:none;stroke:#e9ffed;stroke-width:1.7;stroke-linecap:round;stroke-dasharray:7 19;opacity:.45;animation:streamFlow 5.8s linear infinite}
+.garden-leaf-fall{animation:gardenLeafFall var(--fall-duration) var(--fall-delay) linear infinite;opacity:0;will-change:transform}
+.garden-leaf-sway{transform-box:fill-box;transform-origin:center;animation:gardenLeafSway var(--sway-duration) var(--sway-delay) ease-in-out infinite}
+@keyframes readingBookDrift{0%,100%{transform:translateY(0) rotateZ(0)}50%{transform:translateY(-7px) rotateZ(.6deg)}}
+@keyframes gardenBreezeLeft{0%,100%{transform:rotate(-.4deg) translateX(-.4px)}50%{transform:rotate(.7deg) translateX(.8px)}}
+@keyframes gardenBreezeRight{0%,100%{transform:rotate(.44deg) translateX(.3px)}50%{transform:rotate(-.63deg) translateX(-.6px)}}
+@keyframes flowerBreeze{0%,100%{transform:rotate(-.14deg) translateX(-.3px)}50%{transform:rotate(.28deg) translateX(.7px)}}
+@keyframes skyDrift{0%,100%{transform:translateX(-2px)}50%{transform:translateX(7px)}}
+@keyframes sunlightBreathe{0%,100%{opacity:.08}50%{opacity:.2}}
+@keyframes streamFlow{to{stroke-dashoffset:-52}}
+@keyframes gardenLeafFall{0%{transform:translate(0,0);opacity:0}12%{opacity:.75}70%{opacity:.65}100%{transform:translate(var(--leaf-drift),425px);opacity:0}}
+@keyframes gardenLeafSway{0%,100%{transform:translateX(-7px) rotate(-26deg) scaleX(.8)}50%{transform:translateX(8px) rotate(37deg) scaleX(1)}}
+@media(max-width:760px){.entrance-layout{inset:0;display:block;padding:0}.entrance-header{background:linear-gradient(#09132245,transparent)}.book-hint{bottom:57px;font-size:7px;letter-spacing:1.3px}#entrance .cover-title{font-size:29px}#entrance .cover-sigil{width:145px;height:145px}#entrance .cover-author{font-size:22px}}
+@media(max-height:500px){.entrance-layout{inset:0;padding:0}.book-hint{bottom:44px}}
+@media(prefers-reduced-motion:reduce){#entrance .book-hover,#entrance.opening .book-hover,.garden-tree,.garden-clouds,.garden-flower-breeze,.garden-sunbeam,.garden-water,.garden-leaf-fall,.garden-leaf-sway{animation:none}.garden-leaf-fall{display:none}}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="270" height="382" viewBox="0 0 270 382">
+  <defs>
+    <linearGradient id="leather"><stop stop-color="#061522"/><stop offset=".065" stop-color="#2a4054"/><stop offset=".12" stop-color="#0e2337"/><stop offset=".65" stop-color="#192f46"/><stop offset="1" stop-color="#0b1c30"/></linearGradient>
+    <radialGradient id="sheen"><stop stop-color="#37617b" stop-opacity=".22"/><stop offset="1" stop-color="#020a17" stop-opacity=".3"/></radialGradient>
+    <pattern id="grain" width="7" height="9" patternUnits="userSpaceOnUse"><path d="M1 2h1M5 6h1M2 8h.5" stroke="#7294a4" stroke-opacity=".11" stroke-width=".5"/></pattern>
+  </defs>
+  <rect width="270" height="382" rx="4" fill="#102238"/>
+  <rect width="270" height="382" rx="4" fill="url(#leather)"/>
+  <rect width="270" height="382" rx="4" fill="url(#sheen)"/>
+  <rect width="270" height="382" rx="4" fill="url(#grain)"/>
+  <g fill="none" stroke="#d9bd7f">
+    <rect x="12.5" y="12.5" width="245" height="357" rx="2" stroke-opacity=".8"/>
+    <rect x="20.5" y="20.5" width="229" height="341" stroke-opacity=".3"/>
+    <path d="M13 41V13h28M229 13h28v28M13 341v28h28M229 369h28v-28" stroke-width="2"/>
+    <path d="m24 24 12 0-12 12Zm222 0-12 0 12 12ZM24 358l12 0-12-12Zm222 0-12 0 12-12Z" stroke-opacity=".6"/>
+    <path d="M6 24v334M11 25v332" stroke-opacity=".28"/>
+    <g transform="translate(135 207)">
+      <circle r="68" stroke-width=".7" stroke-opacity=".5"/>
+      <circle r="56"/>
+      <circle r="46" stroke-dasharray="1.6 7"/>
+      <path d="M0-81v24M0 57v24M-81 0h24M57 0h24M-57-57l15 15M42 42l15 15M-57 57l15-15M42-42l15-15"/>
+      <path d="m0-43 10 33 33 10-33 10-10 33-10-33-33-10 33-10Z" stroke-width="1.2"/>
+      <path d="m0-18 5 13 13 5-13 5-5 13-5-13-13-5 13-5Z" fill="#ddc38a"/>
+      <path d="M-5-68 0-73l5 5-5 5ZM-5 68l5-5 5 5-5 5ZM-68-5l5 5-5 5-5-5ZM68-5l5 5-5 5-5-5Z" fill="#ddc38a" stroke="none"/>
+    </g>
+  </g>
+</svg>

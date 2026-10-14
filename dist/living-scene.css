@@ -1,0 +1,34 @@
+/* Wind and flowing water outside, slow sun and shade inside, and a gently levitating book. */
+.entrance-art,.garden-scene{animation:roomAmbientLight 52s -15s ease-in-out infinite}
+.garden-tree-left{animation:gardenBreezeLeft 7.2s ease-in-out infinite}
+.garden-tree-right{animation:gardenBreezeRight 9.1s -3.7s ease-in-out infinite}
+.garden-flower-breeze{animation:flowerBreeze 5.9s -2s ease-in-out infinite}
+.garden-clouds{animation:skyDrift 24s ease-in-out infinite}
+.garden-water{stroke-width:1.8;stroke-dasharray:10 18;opacity:.54;animation:streamFlow 3.8s linear infinite}
+.garden-water-secondary{stroke:#b9edf0;stroke-width:1;stroke-dasharray:5 21;opacity:.65;animation:counterStreamFlow 5.2s -2s linear infinite}
+.room-lighting{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.room-sunlight{transform-box:view-box;transform-origin:1040px 275px;opacity:.25;animation:roomSunDrift 43s -12s ease-in-out infinite}
+.room-leaf-shadows{color:#14211a;fill:currentColor;opacity:.09;transform-box:view-box;transform-origin:835px 636px;animation:roomShadowDrift 34s -8s ease-in-out infinite}
+.room-dust-mote{opacity:0;animation:roomDustDrift var(--dust-duration) var(--dust-delay) linear infinite}
+#entrance .book{transform:rotateX(65deg) rotateY(-5deg) rotateZ(-8deg) scale(.64)}
+#entrance .book-hover{transform:translateY(-68px);animation:deskBookLevitation 6.8s -1.7s ease-in-out infinite;will-change:transform}
+#entrance.opening .book-hover{transform:translateY(0);transition:transform 1.3s cubic-bezier(.22,.6,.3,1);animation:readingBookDrift 6s 1.4s ease-in-out infinite}
+#entrance .book-cover{outline:2px solid #ffe3a6;outline-offset:4px;box-shadow:inset 0 0 32px #02081760,0 0 9px #ffe4a6a6,0 0 25px #eabd6770,0 0 48px #87c9df40;animation:bookOutlineGlow 6.8s -1.7s ease-in-out infinite}
+#entrance .book-back{box-shadow:3px 8px 10px #321a0c55,0 0 15px #eabd6745}
+.desk-book-glow{position:absolute;left:50%;top:calc(50% + 18px);width:220px;height:78px;border-radius:50%;transform:translate(-50%,-50%) rotate(-7deg);background:radial-gradient(ellipse,#ffe1a545,#e2bd6815 42%,transparent 72%);pointer-events:none;animation:deskLightPulse 6.8s -1.7s ease-in-out infinite}
+.book-contact-shadow{background:radial-gradient(ellipse,#28140965,transparent 70%);animation:levitationShadow 6.8s -1.7s ease-in-out infinite}
+.entrance.opening .book-contact-shadow,.entrance.opening .desk-book-glow{animation:none;opacity:0;transition:opacity .45s}
+@keyframes roomAmbientLight{0%,100%{filter:brightness(.94) saturate(1.02)}50%{filter:brightness(1.015) saturate(1.045)}}
+@keyframes gardenBreezeLeft{0%,100%{transform:rotate(-.65deg) translateX(-.6px)}50%{transform:rotate(1.15deg) translateX(1.1px)}}
+@keyframes gardenBreezeRight{0%,100%{transform:rotate(.7deg) translateX(.4px)}50%{transform:rotate(-.95deg) translateX(-.8px)}}
+@keyframes flowerBreeze{0%,100%{transform:rotate(-.22deg) translateX(-.4px)}50%{transform:rotate(.38deg) translateX(.9px)}}
+@keyframes counterStreamFlow{to{stroke-dashoffset:-78}}
+@keyframes roomSunDrift{0%,100%{transform:translate(-18px,3px) rotate(-1.2deg);opacity:.2}50%{transform:translate(27px,-5px) rotate(1.35deg);opacity:.38}}
+@keyframes roomShadowDrift{0%,100%{transform:translate(-18px,4px) rotate(-.6deg);opacity:.08}50%{transform:translate(25px,-7px) rotate(.8deg);opacity:.145}}
+@keyframes roomDustDrift{0%{transform:translate(0,0);opacity:0}18%{opacity:.55}75%{opacity:.35}100%{transform:translate(24px,-67px);opacity:0}}
+@keyframes deskBookLevitation{0%,100%{transform:translate3d(-1px,-63px,0) rotateZ(-.65deg)}50%{transform:translate3d(2px,-82px,0) rotateZ(.7deg)}}
+@keyframes bookOutlineGlow{0%,100%{outline-color:#f8d99b;box-shadow:inset 0 0 32px #02081760,0 0 8px #ffe4a68c,0 0 22px #eabd6761,0 0 42px #87c9df32}50%{outline-color:#fff0c7;box-shadow:inset 0 0 32px #02081760,0 0 12px #ffe4a6bf,0 0 34px #eabd6790,0 0 65px #87c9df59}}
+@keyframes levitationShadow{0%,100%{transform:translate(-50%,-50%) rotate(-7deg) scale(.92);opacity:.44}50%{transform:translate(-50%,-50%) rotate(-7deg) scale(1.1);opacity:.27}}
+@keyframes deskLightPulse{0%,100%{opacity:.58}50%{opacity:.95}}
+@media(max-width:760px){.entrance-controls{gap:14px}.room-leaf-shadows{opacity:.08}}
+@media(prefers-reduced-motion:reduce){.entrance-art,.garden-scene,.room-sunlight,.room-leaf-shadows,.room-dust-mote,#entrance .book-hover,#entrance.opening .book-hover,#entrance .book-cover,.desk-book-glow,.book-contact-shadow{animation:none}.garden-stream-texture{filter:none}.room-dust-mote{display:none}#entrance .book-hover{transform:translateY(-68px)}#entrance.opening .book-hover{transform:translateY(0)}}

@@ -1,0 +1,10 @@
+{
+  "mode": "built-in image generation; edit using original room as reference",
+  "output": "dist/assets/reading-room-v2.webp",
+  "generated_dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "original_reference": "dist/assets/reading-room.webp",
+  "prompt": "Edit target: the attached room image. Create a sharper, more beautiful, premium fantasy-anime illustration of this SAME Japanese reading room. Preserve the frontal camera, warm wooden ceiling and beams, shoji walls, side furniture, tatami floor, centered low wooden table, and the garden seen through the open middle doorway. Make the wood grain, joinery, paper screens, plants and warm natural lighting beautifully crisp and refined. The foreground TABLE is essential: broaden its tabletop a little, keep it centered near 52% of image width and 76% of image height, with a clearly visible flat empty wooden surface in its center where a separate interactive book will be placed in a website. Move the existing teapot and cup to the far left corner of the tabletop; do not paint any book on the table. Outside, render a lush gorgeous sunlit Japanese garden with leafy trees, flowers, mossy stones and distant green hills; rich depth, delicate dappled sunlight, a gentle breeze suggested in the foliage. Keep the open doorway in the same part of the composition, roughly x44%–64%, y29%–70%. Make the garden vivid and detailed while keeping the room serene and warmly lit. Polished hand-painted anime background art, fine crisp detail with natural shading, a cinematic immersive fantasy reading-room atmosphere. Widescreen 16:9 landscape, ideally 2560x1440. No people, no text, no logos, no watermarks, no built-in book, no new decorative clutter."
+}

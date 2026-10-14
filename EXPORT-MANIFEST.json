@@ -1,0 +1,180 @@
+{
+  "source_commit": "3310059633083da9c579756aac284c33d5d07bc7",
+  "published_version": 11,
+  "original_files": [
+    {
+      "source_path": ".openai/hosting.json",
+      "export_path": ".openai/hosting.json",
+      "bytes": 100,
+      "sha256": "8229577b647dbe50a1ec4e5920ed33d06075770bfa42f3458e758075e07476ac"
+    },
+    {
+      "source_path": "README.md",
+      "export_path": "docs/README.original.md",
+      "bytes": 7007,
+      "sha256": "b30aec4d83152666bc5ccfceac30c8384dfc102da8d8f089c0de4aa01c2d55a2"
+    },
+    {
+      "source_path": "dist/app.js",
+      "export_path": "dist/app.js",
+      "bytes": 44013,
+      "sha256": "0350d0edd262122de01698d7f5ae5e26e581fcddf71ba1237bac030c21d36c17"
+    },
+    {
+      "source_path": "dist/assets/a-distant-journey.mp3",
+      "export_path": "dist/assets/a-distant-journey.mp3",
+      "bytes": 3841297,
+      "sha256": "db04eb2ec95a38fa47bf0b75291cc3edf48816119d329b117b680aa403e59587"
+    },
+    {
+      "source_path": "dist/assets/book-cinematic.mp3",
+      "export_path": "dist/assets/book-cinematic.mp3",
+      "bytes": 164929,
+      "sha256": "6cd6b48f15e55a8e1f3b05a1ebaecc00e201d9fbe5ddae2d7287a538ea04eafd"
+    },
+    {
+      "source_path": "dist/assets/fantasy-novel-loop.mp3",
+      "export_path": "dist/assets/fantasy-novel-loop.mp3",
+      "bytes": 4321197,
+      "sha256": "5fe9c5c8450cd13e739389068a54061c08dea93c4ff82f8940b71f67842c3816"
+    },
+    {
+      "source_path": "dist/assets/favicon.svg",
+      "export_path": "dist/assets/favicon.svg",
+      "bytes": 346,
+      "sha256": "b8d7071863e6aba394c7e52a4f79edbda801873cdce615e03e4d9d06962fafa6"
+    },
+    {
+      "source_path": "dist/assets/forbidden-cover.svg",
+      "export_path": "dist/assets/forbidden-cover.svg",
+      "bytes": 1944,
+      "sha256": "97c2366b1d2142a69c5d9add74fef96e191e3c6a79fad9faa99e46ba28714978"
+    },
+    {
+      "source_path": "dist/assets/overhead-desk.webp",
+      "export_path": "dist/assets/overhead-desk.webp",
+      "bytes": 307818,
+      "sha256": "112b6e1ecaa7f6393a93ed6c45b4b09aa23293867fd91ca1d39d6e68eeccaa01"
+    },
+    {
+      "source_path": "dist/assets/reading-room-v2.webp",
+      "export_path": "dist/assets/reading-room-v2.webp",
+      "bytes": 528582,
+      "sha256": "e3d7a20d3b98f52576d23e5609b30221960edd650c1b4a2bd39dff8573b440b9"
+    },
+    {
+      "source_path": "dist/assets/reading-room.webp",
+      "export_path": "dist/assets/reading-room.webp",
+      "bytes": 411894,
+      "sha256": "634cd975601c0ddadb01e481683fa898d6243d0c47f9c906a3c4bf3fe318742e"
+    },
+    {
+      "source_path": "dist/assets/starlit-world.webp",
+      "export_path": "dist/assets/starlit-world.webp",
+      "bytes": 521412,
+      "sha256": "63bebcc2b9e09060683de3038409af6d64da0b42e94cd4122324485ef1ca12d9"
+    },
+    {
+      "source_path": "dist/assets/sunlit-pages-and-birds.mp3",
+      "export_path": "dist/assets/sunlit-pages-and-birds.mp3",
+      "bytes": 2260159,
+      "sha256": "c3b37345b11978d52f57402eb386b85eac8bc9f09e019f5a38959341156ea6ca"
+    },
+    {
+      "source_path": "dist/assets/under-the-stars.mp3",
+      "export_path": "dist/assets/under-the-stars.mp3",
+      "bytes": 1201351,
+      "sha256": "135804e35b5840dbf294ce2df59caf00a7e69173f693b9396dd6dbf19f16e7fc"
+    },
+    {
+      "source_path": "dist/book.json",
+      "export_path": "dist/book.json",
+      "bytes": 319,
+      "sha256": "a6705f49c01035d153dbfdf92e86a5b01ed0e61a8c9b918fc0eaf881d5ffdcb2"
+    },
+    {
+      "source_path": "dist/cinematic.css",
+      "export_path": "dist/cinematic.css",
+      "bytes": 4198,
+      "sha256": "e802738449cf3b8ea159d400c14048b9638794245b317f15acbbc4cd41757101"
+    },
+    {
+      "source_path": "dist/desk-atmosphere.css",
+      "export_path": "dist/desk-atmosphere.css",
+      "bytes": 214,
+      "sha256": "d8ac1eaee5904da220d49b630de0f25562817682bfc8c3c649ae718c24aa5fd0"
+    },
+    {
+      "source_path": "dist/desk-atmosphere.js",
+      "export_path": "dist/desk-atmosphere.js",
+      "bytes": 6670,
+      "sha256": "90aafe4c8109cb65888edf24d8b96f802cb226f102e936e7f3a4d6133986c4f1"
+    },
+    {
+      "source_path": "dist/entrance.css",
+      "export_path": "dist/entrance.css",
+      "bytes": 10607,
+      "sha256": "dae44fa33a01e4bad759f52e62f96639eefab4fcb4651724b2f5f2186c4e50c0"
+    },
+    {
+      "source_path": "dist/garden.css",
+      "export_path": "dist/garden.css",
+      "bytes": 5246,
+      "sha256": "a2b225c1f20bf8597b8ab1ea3e7f12974aedd346975112b4adc7e91d80896776"
+    },
+    {
+      "source_path": "dist/index.html",
+      "export_path": "dist/index.html",
+      "bytes": 26031,
+      "sha256": "f0b1b074c5cf03678cd298fe0bc1b7e7ff174afb366b51599d3223706c4166cf"
+    },
+    {
+      "source_path": "dist/living-scene.css",
+      "export_path": "dist/living-scene.css",
+      "bytes": 4647,
+      "sha256": "e00ad9637943fcdf39c04e15bd72b1a31e3313325165a48b0ebe543cca132ade"
+    },
+    {
+      "source_path": "dist/styles.css",
+      "export_path": "dist/styles.css",
+      "bytes": 38843,
+      "sha256": "423179641dce99b05e20ec5683f49ade083a4f05dc1fdf471770b67a0854a9df"
+    },
+    {
+      "source_path": "tools/compose-garden-score.py",
+      "export_path": "tools/compose-garden-score.py",
+      "bytes": 6527,
+      "sha256": "dc1a1637d00ce220c05733a506e9840e0055a42795b524bd25f143959e2ca363"
+    },
+    {
+      "source_path": "tools/compose-intro-sfx.py",
+      "export_path": "tools/compose-intro-sfx.py",
+      "bytes": 4873,
+      "sha256": "65e5a5997c17b3165f6e59ed9a447e4ba517a2cba71b93c15fcb3fdc04f69583"
+    },
+    {
+      "source_path": "tools/compose-journey-score.py",
+      "export_path": "tools/compose-journey-score.py",
+      "bytes": 7104,
+      "sha256": "823b713d6f424bfc38def00d235f1dc5f6953037d393bc57dcca4c97bd68aabc"
+    },
+    {
+      "source_path": "tools/compose-score.py",
+      "export_path": "tools/compose-score.py",
+      "bytes": 4265,
+      "sha256": "6c9d0e31359b71eda5dabd933b3d062b0fc0cbad5829b0a0334cebba589dde4b"
+    },
+    {
+      "source_path": "tools/overhead-art-generation.json",
+      "export_path": "tools/overhead-art-generation.json",
+      "bytes": 1729,
+      "sha256": "fa80fce2332f30ea9165288b8fd971ee78b3fa375975925b42e6452e1a53fd58"
+    },
+    {
+      "source_path": "tools/room-art-generation.json",
+      "export_path": "tools/room-art-generation.json",
+      "bytes": 1721,
+      "sha256": "c589eead6d9e28694a93f6d355a11fad56a000f60d5a9bdb62b11b92ec0c908e"
+    }
+  ]
+}

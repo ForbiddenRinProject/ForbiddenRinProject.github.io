@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091423">
+  <meta name="description" content="Enter Forbidden: a cinematic fantasy book, a place for its story, characters, and world.">
+  <title>Forbidden — A World Within the Pages</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/starlit-world.webp" as="image">
+  <link rel="preload" href="assets/reading-room-v2.webp" as="image">
+  <link rel="preload" href="assets/overhead-desk.webp" as="image">
+  <link rel="preload" href="assets/forbidden-cover.svg" as="image">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cinematic.css">
+  <link rel="stylesheet" href="garden.css">
+  <link rel="stylesheet" href="living-scene.css">
+  <link rel="stylesheet" href="entrance.css?v=glow-smooth-20261013">
+  <link rel="stylesheet" href="desk-atmosphere.css?v=smooth-20261013">
+  <script src="desk-atmosphere.js?v=smooth-20261013" defer></script>
+  <script src="app.js?v=loop-smooth-20261013" defer></script>
+</head>
+<body class="intro-active">
+  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 1 2.7 8.3L23 12l-8.3 2.7L12 23l-2.7-8.3L1 12l8.3-2.7Z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5c-3-3-7-2-10-1v15c3-1 7-2 10 1 3-3 7-2 10-1V4c-3-1-7-2-10 1Zm0 0v15"/></symbol>
+      <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></symbol>
+      <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 8-3 5-5 3 3-5Z"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+      <symbol id="i-feather" viewBox="0 0 24 24"><path d="M3 21 15 9m-8 9c-1-5 0-9 5-13s10-4 9 1-5 10-10 11Zm8-9 4 1"/></symbol>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 7l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></symbol>
+    </defs>
+  </svg>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="chapter-flash" class="chapter-flash" aria-hidden="true"></div>
+  <audio id="background-music" src="assets/fantasy-novel-loop.mp3" preload="metadata" loop></audio>
+  <audio id="intro-sound" src="assets/book-cinematic.mp3" preload="auto"></audio>
+
+  <section id="entrance" class="entrance" aria-label="Open the book">
+    <div class="room-scene" aria-hidden="true">
+    <div class="entrance-art"></div>
+    <svg class="garden-scene" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="garden-edge-softness" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="4"/></filter>
+        <mask id="garden-left-canopy" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><path d="M680 258 C742 248 805 250 856 286 C879 327 842 367 790 380 C798 426 762 476 704 531 L680 521 Z" fill="white" filter="url(#garden-edge-softness)"/></mask>
+        <mask id="garden-right-canopy" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><path d="M999 265 C967 296 947 356 949 417 C917 449 948 505 1001 547 L1056 567 L1056 265 Z" fill="white" filter="url(#garden-edge-softness)"/></mask>
+        <mask id="garden-flowers" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><path d="M685 536 C731 515 779 526 819 560 L843 627 L683 627 Z M973 546 C1005 520 1035 527 1055 554 L1054 627 L994 620 Z" fill="white" filter="url(#garden-edge-softness)"/></mask>
+        <mask id="garden-sky" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><path d="M865 262 L994 265 L966 320 L911 347 L860 319 Z" fill="white" filter="url(#garden-edge-softness)"/></mask>
+        <clipPath id="garden-doorway"><rect x="676" y="254" width="380" height="376"/></clipPath>
+        <clipPath id="garden-stream"><path d="M840 550 C862 541 899 548 925 543 L960 566 L936 590 L854 585 Z"/></clipPath>
+        <linearGradient id="garden-sunlight" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0af" stop-opacity=".5"/><stop offset="1" stop-color="#fff4cc" stop-opacity="0"/></linearGradient>
+        <filter id="living-stream-ripples" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="830" y="535" width="145" height="67" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency=".035 .14" numOctaves="1" seed="7" stitchTiles="stitch" result="waterNoise"><animate attributeName="baseFrequency" values=".035 .14;.043 .18;.035 .14" dur="7s" repeatCount="indefinite"/></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="waterNoise" scale="3.7" xChannelSelector="R" yChannelSelector="B"/>
+        </filter>
+      </defs>
+      <g mask="url(#garden-sky)"><image class="garden-clouds" href="assets/reading-room-v2.webp" width="1672" height="941"/></g>
+      <g mask="url(#garden-left-canopy)"><image class="garden-tree garden-tree-left" href="assets/reading-room-v2.webp" width="1672" height="941"/></g>
+      <g mask="url(#garden-right-canopy)"><image class="garden-tree garden-tree-right" href="assets/reading-room-v2.webp" width="1672" height="941"/></g>
+      <g mask="url(#garden-flowers)"><image class="garden-flower-breeze" href="assets/reading-room-v2.webp" width="1672" height="941"/></g>
+      <g clip-path="url(#garden-doorway)"><path class="garden-sunbeam" d="M1014 258 L1057 258 L905 630 L735 630 Z" fill="url(#garden-sunlight)"/><g id="falling-leaves"></g></g>
+      <g clip-path="url(#garden-stream)"><image class="garden-stream-texture" href="assets/reading-room-v2.webp" width="1672" height="941" filter="url(#living-stream-ripples)"/></g>
+      <g class="garden-water" clip-path="url(#garden-stream)"><path d="M839 559 C860 553 883 567 906 558 M852 570 C876 563 898 579 927 569 M868 580 C890 574 913 587 942 578"/><path class="garden-water-secondary" d="M846 555 C873 547 895 560 929 551 M855 566 C877 560 903 571 944 563 M865 582 C886 577 914 584 939 576"/></g>
+    </svg>
+    <svg class="room-lighting" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="room-shadow-softness" x="-8%" y="-8%" width="116%" height="116%"><feGaussianBlur stdDeviation="5"/></filter>
+        <linearGradient id="room-sunray-fill" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b4" stop-opacity=".52"/><stop offset=".5" stop-color="#ffe7a4" stop-opacity=".24"/><stop offset="1" stop-color="#ffdeb0" stop-opacity="0"/></linearGradient>
+        <pattern id="room-leaf-pattern" patternUnits="userSpaceOnUse" width="246" height="186">
+          <ellipse cx="43" cy="38" rx="45" ry="19" transform="rotate(-25 43 38)"/><ellipse cx="129" cy="62" rx="35" ry="15" transform="rotate(31 129 62)"/><ellipse cx="204" cy="24" rx="39" ry="17" transform="rotate(-17 204 24)"/><ellipse cx="189" cy="141" rx="48" ry="20" transform="rotate(27 189 141)"/><ellipse cx="72" cy="134" rx="31" ry="13" transform="rotate(-39 72 134)"/>
+        </pattern>
+        <mask id="room-lit-surfaces" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941">
+          <path d="M29 113 L492 263 L493 727 L26 905 Z M494 668 L674 635 L1058 635 L1285 675 L1672 941 L0 941 Z M1073 257 L1241 239 L1244 675 L1073 653 Z" fill="white"/>
+        </mask>
+        <clipPath id="room-sunbeam-area"><path d="M1016 255 L1061 257 L1390 941 L295 941 Z"/></clipPath>
+      </defs>
+      <g mask="url(#room-lit-surfaces)">
+        <g class="room-sunlight"><path d="M1020 255 L1066 257 L1430 941 L234 941 Z M936 258 L959 258 L938 941 L467 941 Z" fill="url(#room-sunray-fill)"/></g>
+        <g class="room-leaf-shadows" filter="url(#room-shadow-softness)"><rect x="-250" y="-186" width="2172" height="1313" fill="url(#room-leaf-pattern)"/></g>
+      </g>
+      <g id="room-dust" clip-path="url(#room-sunbeam-area)"></g>
+    </svg>
+    </div>
+    <div class="overhead-scene" aria-hidden="true">
+      <div class="overhead-art"></div>
+      <div class="desk-sunlight"></div>
+      <canvas id="desk-atmosphere" class="desk-atmosphere" width="1672" height="941" aria-hidden="true"></canvas>
+    </div>
+    <div class="entrance-vignette" aria-hidden="true"></div>
+    <header class="entrance-header">
+      <a class="wordmark" href="#home" data-skip><span data-title>Forbidden</span><small>R I N</small></a>
+      <span class="edition-label">A WORLD WITHIN THE PAGES</span>
+      <div class="entrance-controls"><button class="music-toggle" data-music-toggle aria-label="Play music and sound effects" aria-pressed="false" title="Play music and sound effects"><svg class="icon"><use href="#i-music"/></svg><span class="music-state">Sound</span></button><button id="entrance-motion-toggle" class="motion-toggle" data-motion-toggle aria-label="Pause environmental motion" title="Pause environmental motion"><span aria-hidden="true">Ⅱ</span></button><button class="text-button skip-button" data-skip>Skip intro <span aria-hidden="true">↗</span></button></div>
+    </header>
+    <div class="portal-stage">
+      <div class="portal-shadow" aria-hidden="true"></div>
+      <div class="portal-glow" aria-hidden="true"></div>
+      <div class="portal-float">
+        <div id="book" class="portal-book" role="button" tabindex="0" aria-disabled="false" aria-label="Open Forbidden and enter the website">
+          <div class="portal-paper-bed" aria-hidden="true"></div>
+          <div class="portal-spread" aria-hidden="true">
+            <div class="portal-page portal-left"><span class="portal-page-star">✧</span><p>Every world<br>begins with a page.</p><small>A WORLD WITHIN</small></div>
+            <div class="portal-page portal-right"><small>THE STORY AWAITS</small><p data-title>Forbidden</p><div class="portal-ink-lines"></div><span class="portal-page-star">✧</span></div>
+          </div>
+          <div class="portal-leaf" style="--page:0" aria-hidden="true"><span>Forbidden</span><i></i><i></i><i></i><i></i></div>
+          <div class="portal-leaf" style="--page:1" aria-hidden="true"><span>The story</span><i></i><i></i><i></i><i></i></div>
+          <div class="portal-leaf" style="--page:2" aria-hidden="true"><span>The characters</span><i></i><i></i><i></i><i></i></div>
+          <div class="portal-leaf" style="--page:3" aria-hidden="true"><span>The world</span><i></i><i></i><i></i><i></i></div>
+          <div class="portal-leaf" style="--page:4" aria-hidden="true"><span>Begin your journey</span><i></i><i></i><i></i><i></i></div>
+          <div class="portal-cover" aria-hidden="true">
+            <img class="portal-cover-art" src="assets/forbidden-cover.svg" alt="" width="270" height="382" draggable="false">
+            <span class="portal-edition">A WORLD WITHIN</span>
+            <span class="portal-title" data-title>Forbidden</span>
+            <span class="portal-author" data-author>Rin</span>
+            <span class="portal-imprint">✧ &nbsp; THE STORY AWAITS &nbsp; ✧</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="book-hint" class="book-hint"><span></span> CLICK TO OPEN <span></span></div>
+    <footer class="entrance-footer"><span>STORY · CHARACTERS · WORLD</span><span>TURN THE PAGE. STEP INSIDE.</span></footer>
+  </section>
+
+  <div id="site" class="site" inert aria-hidden="true">
+    <header class="site-header">
+      <a href="#home" class="wordmark"><span data-title>Forbidden</span><small>R I N</small></a>
+      <nav aria-label="Main navigation">
+        <a href="#home" data-route="home" class="active">The beginning</a>
+        <a href="#story" data-route="story">Story</a>
+        <a href="#characters" data-route="characters">Characters</a>
+        <a href="#world" data-route="world">World map</a>
+      </nav>
+      <div class="site-controls"><div class="music-control"><button class="music-toggle" data-music-toggle aria-label="Play music and sound effects" aria-pressed="false" title="Play music and sound effects"><svg class="icon"><use href="#i-music"/></svg><span class="music-state">Sound</span></button><input id="music-volume" class="music-volume" aria-label="Sound volume" type="range" min="0" max="100" value="45" title="Sound volume"></div><button id="motion-toggle" class="motion-toggle" data-motion-toggle aria-label="Pause environmental motion" title="Pause environmental motion"><span aria-hidden="true">Ⅱ</span></button></div>
+    </header>
+    <main>
+      <section id="home-view" class="view home-view" aria-labelledby="home-title">
+        <div class="hero-art" aria-hidden="true"></div><div class="hero-shade" aria-hidden="true"></div><div class="particles" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <div class="eyebrow"><svg class="icon filled"><use href="#i-star"/></svg> THE WORLD OF <span data-author>Rin</span></div>
+          <h1 id="home-title" data-title>Forbidden</h1>
+          <div class="hero-ornament" aria-hidden="true"><span></span>✧<span></span></div>
+          <h2 id="home-tagline">A world within the pages.</h2>
+          <p id="home-description">Open the book. Discover its characters.<br>Explore the world beyond the words.</p>
+          <div class="hero-actions"><a href="#story" class="gold-button">Enter the story <svg class="icon"><use href="#i-arrow"/></svg></a><a href="#world" class="outline-button"><svg class="icon"><use href="#i-compass"/></svg> Explore the world</a></div>
+        </div>
+        <a href="#discover" class="scroll-cue"><span>THERE IS MORE TO DISCOVER</span><i aria-hidden="true"></i></a>
+        <div class="hero-side-label" aria-hidden="true">A JOURNEY BEYOND THE ORDINARY</div>
+        <div class="hero-bottom"><span>01 / THE BEGINNING</span><span>✦ &nbsp; A STORY BY <span data-author>Rin</span></span></div>
+        <div id="discover" class="discovery">
+          <div class="section-heading"><div class="eyebrow">BEYOND THE COVER</div><h2>Choose your path.</h2><p>One book. A whole world to explore.</p></div>
+          <div class="path-grid">
+            <a class="path path-story" href="#story"><span class="path-number">I</span><svg class="path-icon"><use href="#i-book"/></svg><div><small>TURN THE FIRST PAGE</small><h3>The story</h3><p>Read chapter by chapter, at your own pace.</p></div><span class="path-arrow" aria-hidden="true">↗</span></a>
+            <a class="path path-characters" href="#characters"><span class="path-number">II</span><svg class="path-icon"><use href="#i-person"/></svg><div><small>MEET THE CAST</small><h3>The characters</h3><p>Discover the people behind the pages.</p></div><span class="path-arrow" aria-hidden="true">↗</span></a>
+            <a class="path path-world" href="#world"><span class="path-number">III</span><svg class="path-icon"><use href="#i-compass"/></svg><div><small>LOOK BEYOND THE HORIZON</small><h3>The world</h3><p>A closer look at the places in the story.</p></div><span class="path-arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="author-note"><svg class="icon"><use href="#i-feather"/></svg><p>This book is taking shape.<br><span>The manuscript, character portraits, and world map will arrive here.</span></p><button class="text-button" data-desk>Visit the Author’s Desk <span aria-hidden="true">↗</span></button></div>
+        </div>
+      </section>
+
+      <section id="story-view" class="view story-view" hidden aria-labelledby="story-title">
+        <div class="view-banner"><div class="eyebrow">THE WRITTEN WORLD</div><h1 id="story-title">The story</h1><p>Let the rest of the world fall away.</p></div>
+        <div class="reader-layout">
+          <aside class="chapter-sidebar"><div class="sidebar-label"><svg class="icon"><use href="#i-book"/></svg> TABLE OF CONTENTS</div><div id="chapter-list"></div><p id="chapter-empty-label" class="muted">The first chapter is on its way.</p></aside>
+          <div class="reader-container">
+            <div class="reader-toolbar"><span id="chapter-indicator">THE OPENING PAGE</span><div class="reader-tools"><button id="font-smaller" aria-label="Decrease reading font size">A−</button><button id="font-larger" aria-label="Increase reading font size">A+</button><button id="reader-theme" aria-label="Switch to night reading" title="Switch reading theme">☾</button><button id="bookmark" aria-label="Save reading position" title="Save reading position">♧</button></div></div>
+            <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
+            <article id="reader-page" class="reader-page" aria-live="polite"></article>
+            <div class="chapter-controls" id="chapter-controls" hidden><button id="prev-chapter" class="text-button">← Previous chapter</button><button id="next-chapter" class="text-button">Next chapter →</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="characters-view" class="view characters-view" hidden aria-labelledby="characters-title">
+        <div class="character-backdrop" aria-hidden="true"></div>
+        <div class="view-banner"><div class="eyebrow">THE SOUL OF THE STORY</div><h1 id="characters-title">The characters</h1><p>Every name has a story.</p></div>
+        <div id="character-content"></div>
+      </section>
+
+      <section id="world-view" class="view world-view" hidden aria-labelledby="world-title">
+        <div class="view-banner"><div class="eyebrow">BEYOND THE PAGES</div><h1 id="world-title">The world atlas</h1><p>Follow the story beyond the horizon.</p></div>
+        <div class="atlas-layout"><div class="map-panel">
+          <div class="map-heading"><span id="map-name">The world of Forbidden</span><span class="map-coordinates" aria-hidden="true">✧ &nbsp; THE AUTHOR’S ATLAS</span></div>
+          <div id="map-viewport" class="map-viewport" tabindex="0" aria-label="World map viewer. Use plus and minus buttons to zoom; drag to pan.">
+            <div id="map-empty" class="map-empty"><div class="atlas-rings" aria-hidden="true"><svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="115"/><circle cx="150" cy="150" r="85"/><path d="M150 10v280M10 150h280M50 50l200 200M50 250 250 50"/><path d="m150 58 22 70 70 22-70 22-22 70-22-70-70-22 70-22Z"/><path d="m150 98 13 39 39 13-39 13-13 39-13-39-39-13 39-13Z"/></svg></div><span class="empty-kicker">AN UNCHARTED WORLD</span><h2>The horizon is waiting.</h2><p>Your world map will appear here.<br>Add your map artwork to begin exploring.</p><button class="outline-button" data-desk="map">Add your world map <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+            <div id="map-transform" class="map-transform" hidden><img id="map-image" alt="World map for Forbidden" draggable="false"><div id="map-pins"></div></div>
+            <div class="compass-label" aria-hidden="true">N<br>✧</div>
+          </div>
+          <div class="map-toolbar"><span id="map-instructions">THE MAP HAS YET TO BE DRAWN</span><div><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-reset" aria-label="Reset map zoom">100%</button><button id="zoom-in" aria-label="Zoom in">+</button></div></div>
+        </div><aside class="atlas-notes"><div class="eyebrow">FIELD NOTES</div><h2 id="location-name">A world of possibilities.</h2><p id="location-description">The places and regions of your story will live here. Select a location on the map to learn more about it.</p><div id="location-list"></div><div class="atlas-note-bottom"><svg class="icon"><use href="#i-compass"/></svg> EVERY PLACE HOLDS A STORY</div></aside></div>
+      </section>
+    </main>
+    <footer class="site-footer"><a href="#home" class="wordmark"><span data-title>Forbidden</span><small>R I N</small></a><p>A world within the pages.</p><div><button id="replay-intro" class="text-button">Reopen the book</button><button class="text-button" data-desk>Author’s Desk <svg class="icon"><use href="#i-feather"/></svg></button></div><small id="footer-credit">A STORY BY RIN</small></footer>
+  </div>
+
+  <dialog id="author-desk" class="author-desk" aria-labelledby="desk-title">
+    <div class="desk-header"><div><div class="eyebrow">YOUR CREATIVE SPACE</div><h2 id="desk-title">The Author’s Desk</h2></div><button id="close-desk" class="icon-button" aria-label="Close Author’s Desk"><svg class="icon"><use href="#i-close"/></svg></button></div>
+    <p class="desk-explanation">Add your book and see it come to life. These drafts save <strong>only in this browser</strong>. Export your content to keep a copy or send it back for publication on the website.</p>
+    <div class="desk-tabs" role="tablist" aria-label="Content editors"><button role="tab" aria-selected="true" aria-controls="desk-book" id="tab-book" data-desk-tab="book">Book</button><button role="tab" aria-selected="false" aria-controls="desk-chapters" id="tab-chapters" data-desk-tab="chapters">Chapters</button><button role="tab" aria-selected="false" aria-controls="desk-characters" id="tab-characters" data-desk-tab="characters">Characters</button><button role="tab" aria-selected="false" aria-controls="desk-map" id="tab-map" data-desk-tab="map">World map</button></div>
+    <section id="desk-book" class="desk-section" role="tabpanel" aria-labelledby="tab-book"><form id="book-form"><div class="form-row"><label>Book title<input name="title" maxlength="80" required></label><label>Author name<input name="author" maxlength="80" required></label></div><label>Tagline<input name="tagline" maxlength="180"></label><label>Introduction<textarea name="description" rows="3" maxlength="2000"></textarea></label><button type="submit" class="gold-button">Save book details</button></form></section>
+    <section id="desk-chapters" class="desk-section" role="tabpanel" aria-labelledby="tab-chapters" hidden><div id="desk-chapter-list" class="draft-list"></div><form id="chapter-form"><input type="hidden" name="id"><label>Chapter title<input name="title" required maxlength="200" placeholder="Chapter 1 — Your title"></label><label>Subtitle <span>(optional)</span><input name="subtitle" maxlength="300"></label><label>Story text<textarea name="text" rows="12" required placeholder="Paste your chapter here. Use blank lines between paragraphs."></textarea></label><div class="form-actions"><button type="submit" class="gold-button">Save chapter</button><button type="button" id="new-chapter" class="text-button">New chapter</button></div></form></section>
+    <section id="desk-characters" class="desk-section" role="tabpanel" aria-labelledby="tab-characters" hidden><div id="desk-character-list" class="draft-list"></div><form id="character-form"><input type="hidden" name="id"><div class="form-row"><label>Character name<input name="name" required maxlength="100"></label><label>Role or title<input name="role" maxlength="180" placeholder="Your character’s role"></label></div><label>Signature quote <span>(optional)</span><input name="quote" maxlength="600"></label><label>About this character<textarea name="description" rows="5" required></textarea></label><label>Portrait<input id="portrait-input" type="file" accept="image/png,image/jpeg,image/webp"><span class="field-note">PNG, JPG, or WebP. Large images are resized for your draft.</span></label><img id="portrait-preview" class="upload-preview" alt="Character portrait preview" hidden><div class="form-actions"><button type="submit" class="gold-button">Save character</button><button type="button" id="new-character" class="text-button">New character</button><button type="button" id="remove-portrait" class="text-button">Remove portrait</button></div></form></section>
+    <section id="desk-map" class="desk-section" role="tabpanel" aria-labelledby="tab-map" hidden><form id="map-form"><label>Map title<input name="title" required maxlength="180"></label><label>World introduction<textarea name="description" rows="3"></textarea></label><label>Map artwork<input id="map-input" type="file" accept="image/png,image/jpeg,image/webp"><span class="field-note">PNG, JPG, or WebP. Use your own map of the book’s world.</span></label><img id="map-preview" class="upload-preview map-preview" alt="World map preview" hidden><div class="form-actions"><button type="submit" class="gold-button">Save map</button><button type="button" id="remove-map" class="text-button">Remove map artwork</button></div></form><hr><h3>Places on your map</h3><p class="field-note">Coordinates run from 0 to 100 across and down your image.</p><div id="desk-location-list" class="draft-list"></div><form id="location-form"><input type="hidden" name="id"><label>Location name<input name="name" required maxlength="120"></label><div class="form-row"><label>Across (%)<input name="x" type="number" min="0" max="100" step="0.1" value="50" required></label><label>Down (%)<input name="y" type="number" min="0" max="100" step="0.1" value="50" required></label></div><label>Location description<textarea name="description" rows="3"></textarea></label><div class="form-actions"><button type="submit" class="outline-button">Save location</button><button type="button" id="new-location" class="text-button">New location</button></div></form></section>
+    <div class="desk-footer"><button id="export-content" class="text-button">Export book content ↓</button><label class="text-button import-label">Import content ↑<input id="import-content" type="file" accept="application/json,.json"></label><span id="draft-status" role="status">No browser draft yet</span></div>
+  </dialog>
+  <noscript><div class="noscript"><h1>Forbidden</h1><p>This book experience needs JavaScript for page turns and navigation. Please enable JavaScript to enter.</p></div></noscript>
+</body>
+</html>

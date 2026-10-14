@@ -1,0 +1,10 @@
+{
+  "asset": "dist/assets/overhead-desk.webp",
+  "reference": "dist/assets/reading-room-v2.webp",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "tool": "built-in Image Generation",
+  "prompt": "Create one beautiful high resolution 16:9 landscape illustration for a cinematic fantasy book website. The attached reference is the SAME warm Japanese reading room in which this scene takes place; it is a style, furniture, material and lighting reference. Change the camera to a true overhead / top-down view looking straight down at the low wooden reading table. The camera is perpendicular to the tabletop, no visible horizon or perspective view of walls. A rich honey-brown polished wooden tabletop with delicate grain fills most of the frame, centered symmetrically, surrounded at the outer edges by a little warm tatami flooring and the edges of two pale linen floor cushions. Preserve the small dark cast iron teapot with curved handle and blue-white porcelain tea cup from the reference, now viewed from above, arranged near the upper LEFT area, away from the center. A few small green leaves near the upper right table edge, an elegant dark fountain pen near the lower right edge. Soft late afternoon golden light and delicate dappled leaf shadows fall diagonally across the desk, with fine dust in the light. The CENTRAL 50 PERCENT of the table must be completely clear EMPTY WOOD, ready for an interactive book to be added in code. Absolutely NO book, NO paper, NO text, NO lettering, NO UI. This should feel like a high-budget hand-painted anime fantasy game cinematic environment: crisp, detailed wood, softly luminous light, peaceful magical mood, refined painterly realism. Clean composition and sharp beautiful detail."
+}

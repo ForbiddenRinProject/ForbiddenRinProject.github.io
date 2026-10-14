@@ -1,0 +1,34 @@
+/* A solid book, a softer hover, and a light-filled chapter transition. */
+.book-hover{position:relative;transform-style:preserve-3d;animation:bookHover 9.5s cubic-bezier(.37,0,.63,1) infinite;will-change:transform}
+.book,.book:disabled,.book.open{opacity:1;filter:none}
+.book:disabled{cursor:default}
+.book-cover,.book-back,.book-endpaper,.turning-page,.page-block{opacity:1}
+.book-cover>span:not(.cover-lining){backface-visibility:hidden;transform:translateZ(.65px)}
+.book-cover .cover-lining{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse at 65% 40%,#f3e6c7,#d8c29a);color:#876c40;transform:rotateY(180deg) translateZ(1px);backface-visibility:hidden;border:1px solid #b49a6c;border-radius:7px 2px 2px 7px;box-shadow:inset -16px 0 30px #66503325}
+.cover-lining::before{content:'';position:absolute;inset:19px;border:1px solid #94774770}
+.cover-lining>span{font:52px var(--serif);color:#9a7e4c}
+.cover-lining>i{font:italic 21px/1.7 var(--serif)}
+.book-stage.opening .book-aura{animation:openingGlow 3.5s ease-in forwards}
+.book-stage.opening .celestial-ring{opacity:.55}
+.chapter-flash{position:fixed;inset:0;z-index:90;opacity:0;pointer-events:none;background:#fff;transition:opacity .46s cubic-bezier(.22,.6,.42,1)}
+.chapter-flash.is-lit{opacity:1;pointer-events:auto}
+.chapter-flash.is-fading{opacity:0;pointer-events:none;transition:opacity 1.25s cubic-bezier(.2,.4,.35,1)}
+.site.flash-reveal,.entrance.flash-covered{transition:none}
+.entrance-controls{display:flex;align-items:center;gap:26px}
+.site-controls{display:flex;align-items:center;gap:17px;flex-shrink:0}
+.music-control{display:flex;align-items:center;gap:9px}
+.music-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:35px;padding:6px 0;border:0;background:none;color:#c4b387;font-size:9px;letter-spacing:.6px;white-space:nowrap}
+.music-toggle .icon{width:18px;height:18px;stroke-width:1.3}
+.music-toggle[aria-pressed="true"]{color:var(--gold-light)}
+.music-toggle[aria-pressed="true"] .icon{filter:drop-shadow(0 0 5px #d6bd883a)}
+.music-volume{appearance:none;-webkit-appearance:none;width:46px;height:16px;background:transparent;cursor:pointer;padding:0}
+.music-volume::-webkit-slider-runnable-track{height:2px;background:#d6bd8859}
+.music-volume::-moz-range-track{height:2px;background:#d6bd8859}
+.music-volume::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:-2.5px}
+.music-volume::-moz-range-thumb{width:7px;height:7px;border:0;border-radius:50%;background:var(--gold)}
+@keyframes bookHover{0%,100%{transform:translate3d(-3px,6px,0) rotateZ(-.6deg)}25%{transform:translate3d(6px,-8px,9px) rotateZ(1.1deg)}50%{transform:translate3d(2px,-23px,16px) rotateZ(.1deg)}75%{transform:translate3d(-7px,-7px,5px) rotateZ(-1.2deg)}}
+@keyframes openingGlow{0%{transform:scale(1);opacity:.4}60%{transform:scale(1.2);opacity:.75}100%{transform:scale(2.15);opacity:1;background:radial-gradient(ellipse,#f6e6c854,transparent 66%)}}
+@media(max-width:1050px){.site-header nav{gap:25px}.site-controls{gap:12px}.music-volume{width:35px}.music-toggle .music-state{display:none}}
+@media(max-width:760px){.site-controls{margin-left:auto;gap:14px}.site-controls .motion-toggle{margin-left:0}.entrance-controls{gap:18px}.entrance-controls .music-state{display:none}.music-volume{width:38px}.cover-lining>i{font-size:18px}.cover-lining>span{font-size:44px}}
+@media(max-height:500px) and (min-width:761px){.entrance-layout{inset:75px 8% 45px}.entrance-copy h1{font-size:34px;line-height:1.12;margin:16px 0}.entrance-copy p,.entrance-note{display:none}.book-stage{height:290px}.book{width:185px;height:262px}.ring-outer{width:290px;height:290px}.ring-inner{width:260px;height:260px}.cover-title{font-size:20px}.cover-edition{font-size:5px;margin-bottom:8px}.cover-sigil{width:94px;height:94px;margin:8px 0}.cover-author{font-size:17px}.cover-bottom{font-size:4px;margin-top:10px}.book-hint{bottom:-10px}.cover-lining>i{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.book-hover{animation:none}.chapter-flash{display:none}}

@@ -1,0 +1,79 @@
+/* A single opaque cover and flat paper planes: no backfaces or 3D depth sorting. */
+#entrance .room-scene{position:absolute;inset:0;z-index:0;opacity:0;transform:scale(1.12);transition:opacity 1.3s ease,transform 1.6s cubic-bezier(.2,.65,.3,1);pointer-events:none}
+#entrance .overhead-scene{position:absolute;inset:0;z-index:1;transform:scale(1);opacity:1;transition:opacity 1.3s ease,transform 1.6s cubic-bezier(.2,.65,.3,1);pointer-events:none}
+#entrance .overhead-art{position:absolute;inset:0;z-index:0;background:#8c4e27 url('assets/overhead-desk.webp') center/cover;pointer-events:none}
+.desk-sunlight{position:absolute;inset:-8%;z-index:2;pointer-events:none;opacity:.2;background:radial-gradient(ellipse at 20% 22%,#293e22 0 2%,transparent 3%),radial-gradient(ellipse at 28% 41%,#293e22 0 3%,transparent 4%),radial-gradient(ellipse at 17% 60%,#293e22 0 2%,transparent 3%),radial-gradient(ellipse at 73% 12%,#3d4c26 0 3%,transparent 4%),radial-gradient(ellipse at 82% 34%,#3d4c26 0 2%,transparent 3%),linear-gradient(115deg,transparent 42%,#fff1b822 50%,transparent 67%);filter:blur(12px);animation:deskShadeDrift 32s -8s ease-in-out infinite;transition:opacity .9s}
+#entrance.in-room .room-scene{opacity:1;transform:scale(1)}
+#entrance.in-room .overhead-scene{opacity:0;transform:scale(1.22)}
+#entrance.in-room .desk-sunlight{opacity:0}
+#entrance .entrance-vignette{z-index:3;pointer-events:none;background:linear-gradient(0deg,#26170c66,transparent 23%,transparent 78%,#23170c77),radial-gradient(ellipse,transparent 45%,#28180b26)}
+#entrance .entrance-header{z-index:8;pointer-events:none;text-shadow:0 2px 12px #251509}
+#entrance .entrance-header a,#entrance .entrance-controls{pointer-events:auto}
+#entrance .entrance-header .wordmark,#entrance .entrance-header .wordmark small,#entrance .music-toggle,#entrance .motion-toggle{color:#fff0cd}
+#entrance .entrance-footer{z-index:7;color:#f9e4c2;pointer-events:none;text-shadow:0 2px 8px #321c0d}
+#entrance .portal-stage{position:absolute;z-index:5;left:50%;top:52%;width:540px;height:382px;transform:translate(-50%,-50%) rotate(-7deg) scale(var(--closed-book-scale,1));transform-origin:center;transition:transform .8s cubic-bezier(.22,.6,.3,1)}
+#entrance.lifting .portal-stage{transform:translate(-50%,-50%) translateY(-46px) rotate(-3deg) scale(calc(var(--closed-book-scale,1)*1.12))}
+#entrance.in-room .portal-stage{transform:translate(-50%,-50%) translateY(-6vh) rotate(-2deg) scale(var(--open-book-scale,1));transition:transform 1.35s cubic-bezier(.22,.6,.3,1)}
+.portal-float{position:relative;width:100%;height:100%}
+#entrance.in-room .portal-float{animation:portalFloat 5.5s 1.35s ease-in-out infinite}
+.portal-shadow{position:absolute;left:135px;top:12px;width:270px;height:382px;border-radius:5px;background:#28160c66;filter:blur(9px);transform:translate(13px,15px);opacity:.8;transition:transform .8s,opacity .8s;pointer-events:none}
+#entrance.lifting .portal-shadow{transform:translate(21px,76px) scale(.88);opacity:.22}
+#entrance.in-room .portal-shadow{opacity:0}
+.portal-glow{position:absolute;inset:-90px -45px;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,#fff1bb52,transparent 64%);opacity:0;transition:opacity 1.25s;filter:blur(12px)}
+#entrance.lifting .portal-glow{opacity:.7}
+#entrance.pages-turning .portal-glow{animation:portalBloom 1.8s ease-in forwards;animation-play-state:running!important}
+.portal-book{position:relative;left:135px;width:270px;height:382px;cursor:pointer;outline:none;transform:translateX(0);transition:transform .95s cubic-bezier(.22,.6,.3,1);isolation:isolate;user-select:none;touch-action:manipulation}
+.portal-book[aria-disabled="true"]{cursor:default;pointer-events:none;opacity:1}
+.portal-book:focus-visible .portal-cover{outline:3px solid #fff1b8;outline-offset:8px}
+.portal-paper-bed{position:absolute;inset:3px -4px -5px 3px;z-index:0;border:1px solid #9e885f;border-radius:3px 8px 8px 3px;background:repeating-linear-gradient(0deg,#ecdfc2 0 2px,#bfae8b 2px 3px);box-shadow:4px 7px 8px #26150d66}
+.portal-cover{position:absolute;inset:0;z-index:30;border-radius:3px 7px 7px 3px;overflow:hidden;background:#102238;color:#e9cf93;transform-origin:left center;transform:scaleX(1);box-shadow:0 0 0 1px #efcf8b,0 0 12px #ffe2a64d,5px 8px 12px #29150f66;opacity:1}
+.portal-cover-art{display:block;width:100%;height:100%;position:absolute;inset:0;pointer-events:none}
+.portal-edition,.portal-title,.portal-author,.portal-imprint{position:absolute;left:24px;right:24px;display:block;text-align:center}
+.portal-edition{top:52px;font-size:7px;letter-spacing:2.6px}
+.portal-title{top:82px;font:30px/1.1 var(--serif);letter-spacing:1px;text-transform:uppercase;overflow-wrap:anywhere;text-shadow:0 2px 3px #020914}
+.portal-author{bottom:59px;font:22px var(--serif);letter-spacing:5px}
+.portal-imprint{bottom:33px;font-size:6px;letter-spacing:1.8px;color:#cdb586}
+.portal-spread{position:absolute;inset:0;z-index:1;pointer-events:none}
+.portal-page{position:absolute;top:3px;width:270px;height:376px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#f2e7cc;color:#8b7045;border:1px solid #bfaa7f;overflow:hidden}
+.portal-left{left:-270px;transform-origin:right center;transform:scaleX(0);border-radius:7px 0 0 7px;background:linear-gradient(90deg,#e6d6b4,#f4e9ce 68%,#ddc8a2);box-shadow:inset -14px 0 22px #72522b1f;transition:transform .6s .45s cubic-bezier(.15,.7,.35,1)}
+.portal-right{left:0;border-radius:0 7px 7px 0;background:linear-gradient(90deg,#d9c5a0,#f5ecd6 14%,#f0e3c7);box-shadow:inset 13px 0 19px #795b3624}
+.portal-page::before{content:'';position:absolute;inset:19px;border:1px solid #b79b673d;pointer-events:none}
+.portal-page-star{font:45px var(--serif);color:#b79862}
+.portal-page p{font:italic 23px/1.6 var(--serif);text-align:center;margin:0}
+.portal-page small{font-size:7px;letter-spacing:2px}
+.portal-ink-lines{width:65%;height:67px;background:repeating-linear-gradient(0deg,transparent 0 15px,#b69d6c40 15px 16px);opacity:.55}
+#entrance.unsealing .portal-book{transform:translateX(135px)}
+#entrance.unsealing .portal-left{transform:scaleX(1)}
+#entrance.unsealing .portal-cover{animation:portalCoverOpen .95s cubic-bezier(.25,.12,.3,1) forwards;animation-play-state:running!important}
+.portal-leaf{position:absolute;left:0;top:3px;width:270px;height:376px;z-index:calc(20 - var(--page));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;border:1px solid #b9a27c;border-radius:0 6px 6px 0;background:linear-gradient(90deg,#d8c3a0,#f7efd9 20%,#eddfbf);color:#9a7b49;transform-origin:left center;transform:scaleX(1);visibility:hidden;opacity:1;pointer-events:none;box-shadow:inset 12px 0 22px #6f512a1a}
+.portal-leaf>span{font:italic 23px var(--serif);text-align:center;padding:0 20px}
+.portal-leaf>i{display:block;width:63%;height:1px;background:#ad946148}
+.portal-leaf>i:last-child{width:37%}
+#entrance.pages-turning .portal-leaf{animation:portalPageTurn .95s cubic-bezier(.23,.12,.35,1) both;animation-delay:calc(var(--page)*.22s);animation-play-state:running!important}
+#entrance.pages-turning .portal-leaf>span{animation:portalPageInk .95s linear both;animation-delay:calc(var(--page)*.22s);animation-play-state:running!important}
+#entrance .book-hint{z-index:7;bottom:66px;color:#ffedc6;text-shadow:0 2px 9px #251409;font-size:9px;letter-spacing:2.3px;transition:opacity .4s}
+#entrance.lifting .book-hint{opacity:0}
+@keyframes portalCoverOpen{0%{transform:scaleX(1);opacity:1}48%{transform:scaleX(.035);opacity:1}49%{transform:scaleX(.01);opacity:0}100%{transform:scaleX(0);opacity:0}}
+@keyframes portalPageTurn{0%{visibility:hidden;transform:scaleX(1) skewY(0)}1%{visibility:visible}44%{transform:scaleX(.035) skewY(-4deg)}55%{transform:scaleX(-.14) skewY(3deg)}99%{visibility:visible;transform:scaleX(-1) skewY(0)}100%{visibility:hidden;transform:scaleX(-1) skewY(0)}}
+@keyframes portalPageInk{0%,34%{opacity:1}46%,100%{opacity:0}}
+@keyframes portalFloat{0%,100%{transform:translateY(0) rotate(.3deg)}50%{transform:translateY(-10px) rotate(-.35deg)}}
+@keyframes portalBloom{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.65)}}
+@keyframes deskShadeDrift{0%,100%{transform:translate(-12px,0) rotate(-.6deg);opacity:.17}50%{transform:translate(21px,9px) rotate(.6deg);opacity:.25}}
+@media(max-width:760px){#entrance .book-hint{bottom:56px;font-size:8px;letter-spacing:1.6px}#entrance .entrance-footer span:last-child{display:none}#entrance .entrance-header{background:none}.entrance-controls{gap:15px}}
+@media(max-height:500px){#entrance .entrance-header{padding-top:18px}#entrance .book-hint{bottom:40px}#entrance .entrance-footer{bottom:16px}}
+@media(prefers-reduced-motion:reduce){#entrance .room-scene,#entrance .overhead-scene,#entrance .portal-stage,.portal-book,.portal-left{transition:none}.desk-sunlight,#entrance.in-room .portal-float{animation:none}}
+
+/* Prepaint the hover halo; animate only its opacity. */
+.portal-book::before{content:'';position:absolute;inset:-9px;z-index:-1;border-radius:10px;background:radial-gradient(ellipse,#ffe7a633,transparent 75%);box-shadow:0 0 22px 8px #ffdb8b66,0 0 64px 20px #f5cf7340;opacity:0;transition:opacity .3s ease;pointer-events:none}
+.portal-book::after{content:'';position:absolute;inset:-2px;z-index:40;border:2px solid #fff0bf;border-radius:4px 8px 8px 4px;box-shadow:0 0 10px #ffe3a6aa;opacity:0;transition:opacity .3s ease;pointer-events:none}
+#entrance:not(.lifting) .portal-book[aria-disabled="false"]:focus-visible::before,#entrance:not(.lifting) .portal-book[aria-disabled="false"]:focus-visible::after{opacity:1}
+@media(hover:hover){#entrance:not(.lifting) .portal-book[aria-disabled="false"]:hover::before,#entrance:not(.lifting) .portal-book[aria-disabled="false"]:hover::after{opacity:1}}
+/* Keep camera changes on compositor layers and idle unseen scenery. */
+#entrance.lifting .overhead-scene,#entrance.lifting .room-scene,#entrance.lifting .portal-stage{will-change:transform,opacity}
+#entrance:not(.in-room) .room-scene *,#entrance.scene-transition .room-scene *,#entrance.scene-transition .desk-sunlight,#entrance.departing *{animation-play-state:paused!important}
+#entrance.overhead-retired .overhead-scene{visibility:hidden}
+.entrance-art,.garden-scene{animation:none}
+body.intro-active .site *{animation-play-state:paused!important}
+.view.route-enter{animation:routeFadeIn .28s ease-out both}
+@keyframes routeFadeIn{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.portal-book::before,.portal-book::after{transition:none}.view.route-enter{animation:none}}
